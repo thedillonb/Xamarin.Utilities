@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Xamarin.Utilities.Services
+namespace Xamarin.Utilities.Core.Services
 {
     public interface IAlertDialogService
     {

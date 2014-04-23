@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BigTed;
 using MonoTouch.UIKit;
+using Xamarin.Utilities.Core.Services;
 
 namespace Xamarin.Utilities.Services
 {

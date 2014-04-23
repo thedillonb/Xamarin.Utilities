@@ -1,6 +1,6 @@
 using System.Net.Http;
 
-namespace Xamarin.Utilities.Services
+namespace Xamarin.Utilities.Core.Services
 {
     public interface IHttpClientService
     {

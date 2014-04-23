@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Xamarin.Utilities.Core.Services;
 
 namespace Xamarin.Utilities.Services
 {

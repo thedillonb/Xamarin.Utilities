@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Xamarin.Utilities.Services
+namespace Xamarin.Utilities.Core.Services
 {
     public class ErrorService : IErrorService
     {

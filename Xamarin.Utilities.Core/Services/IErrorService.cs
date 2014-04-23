@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Xamarin.Utilities.Services
+namespace Xamarin.Utilities.Core.Services
 {
     public delegate void AddExtraInformationDelegate(Exception exception, Dictionary<string, string> extras);
      

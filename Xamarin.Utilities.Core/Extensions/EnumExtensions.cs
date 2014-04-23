@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace System
+﻿namespace System
 {
     public class EnumDescription : Attribute
     {

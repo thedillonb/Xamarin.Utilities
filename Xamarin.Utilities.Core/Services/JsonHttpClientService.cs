@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Xamarin.Utilities.Services
+namespace Xamarin.Utilities.Core.Services
 {
     public class JsonHttpClientService : IJsonHttpClientService
     {

@@ -34,57 +34,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Xamarin.Utilities\Extensions\DateTimeExtensions.cs">
-      <Link>Extensions\DateTimeExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Extensions\EnumExtensions.cs">
-      <Link>Extensions\EnumExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Extensions\FireAndForget.cs">
-      <Link>Extensions\FireAndForget.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\IoC\TinyIoC.cs">
-      <Link>IoC\TinyIoC.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\IoC\TinyMessenger.cs">
-      <Link>IoC\TinyMessenger.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Persistence\SQLite.cs">
-      <Link>Persistence\SQLite.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\ErrorService.cs">
-      <Link>Services\ErrorService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IAlertDialogService.cs">
-      <Link>Services\IAlertDialogService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IDefaultValueService.cs">
-      <Link>Services\IDefaultValueService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IEnvironmentalService.cs">
-      <Link>Services\IEnvironmentalService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IErrorService.cs">
-      <Link>Services\IErrorService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IHttpClientService.cs">
-      <Link>Services\IHttpClientService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IJsonHttpClientService.cs">
-      <Link>Services\IJsonHttpClientService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IJsonSerializationService.cs">
-      <Link>Services\IJsonSerializationService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\INetworkActivityService.cs">
-      <Link>Services\INetworkActivityService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\IStatusIndicatorService.cs">
-      <Link>Services\IStatusIndicatorService.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Utilities\Services\JsonHttpClientService.cs">
-      <Link>Services\JsonHttpClientService.cs</Link>
-    </Compile>
     <Compile Include="Extensions\UIImageExtensions.cs" />
     <Compile Include="Images\UIImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,7 +49,12 @@
     <Compile Include="Views\ScrollingToolbarView.cs" />
     <Compile Include="XCallback\XCallbackQuery.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
+      <Project>{ebba1bd0-8430-4cc1-b636-b89c505c7d1c}</Project>
+      <Name>Xamarin.Utilities.Core.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="BTProgressHUD">
       <HintPath>..\lib\iOS\BTProgressHUD.dll</HintPath>
