@@ -37,6 +37,7 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\FireAndForget.cs" />
+    <Compile Include="IoC\IoC.cs" />
     <Compile Include="IoC\TinyIoC.cs" />
     <Compile Include="IoC\TinyMessenger.cs" />
     <Compile Include="Persistence\SQLite.cs" />
@@ -56,6 +57,7 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Monotouch" />
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Core" />
