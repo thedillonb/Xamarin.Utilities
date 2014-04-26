@@ -38,8 +38,9 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\FireAndForget.cs" />
     <Compile Include="IoC\IoC.cs" />
+    <Compile Include="Messenger\Messenger.cs" />
     <Compile Include="IoC\TinyIoC.cs" />
-    <Compile Include="IoC\TinyMessenger.cs" />
+    <Compile Include="Messenger\TinyMessenger.cs" />
     <Compile Include="Persistence\SQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ErrorService.cs" />
