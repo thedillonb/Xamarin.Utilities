@@ -7,15 +7,14 @@ namespace Xamarin.Utilities.Core.Messenger
     {
         private static readonly Lazy<TinyMessengerHub> TinyMessenger = new Lazy<TinyMessengerHub>();
 
-        public static void Publish(MessageBase message)
+        public static void Publish<TMessage>(TMessage message) where TMessage : MessageBase
         {
-            TinyMessenger.Value.Publish(message);
+            TinyMessenger.Value.Publish<TMessage>(message);
         }
 
-        public static object Subscribe<TMessage>(Action<TMessage> messageAction)
-            where TMessage : MessageBase
+        public static object Subscribe<TMessage>(Action<TMessage> messageAction) where TMessage : MessageBase
         {
-            return TinyMessenger.Value.Subscribe(messageAction, false);
+            return TinyMessenger.Value.Subscribe<TMessage>(messageAction, false);
         }
     }
 
