@@ -47,6 +47,7 @@
     <Compile Include="ViewControllers\ComposerViewController.cs" />
     <Compile Include="ViewControllers\LiteComposerViewController.cs" />
     <Compile Include="Views\PickerAlertView.cs" />
+    <Compile Include="Views\RoundedRectView.cs" />
     <Compile Include="Views\ScrollingToolbarView.cs" />
     <Compile Include="XCallback\XCallbackQuery.cs" />
   </ItemGroup>
