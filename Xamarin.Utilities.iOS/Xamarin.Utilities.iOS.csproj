@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Extensions\UIImageExtensions.cs" />
     <Compile Include="Images\UIImageHelper.cs" />
+    <Compile Include="Layouts\Layouts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlertDialogService.cs" />
     <Compile Include="Services\DefaultValueService.cs" />
