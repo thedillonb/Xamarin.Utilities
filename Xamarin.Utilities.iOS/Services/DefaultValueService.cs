@@ -10,10 +10,12 @@ namespace Xamarin.Utilities.Services
 
         public T Get<T>(string key)
         {
-            if (typeof(T) == typeof(int))
+            if (typeof (T) == typeof(int))
                 return (T)(object)Defaults.IntForKey(key);
-            if (typeof(T) == typeof(bool))
+            if (typeof (T) == typeof(bool))
                 return (T)(object)Defaults.BoolForKey(key);
+            if (typeof (T) == typeof (string))
+                return (T) (object) Defaults.StringForKey(key);
             throw new Exception("Key does not exist in Default database.");
         }
 
@@ -39,6 +41,8 @@ namespace Xamarin.Utilities.Services
                 Defaults.SetInt((int)value, key);
             else if (value is bool)
                 Defaults.SetBool((bool)value, key);
+            else if (value is string)
+                Defaults.SetString((string)value, key);
             Defaults.Synchronize();
         }
     }

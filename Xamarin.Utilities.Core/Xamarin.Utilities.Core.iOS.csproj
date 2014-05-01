@@ -52,11 +52,15 @@
     <Compile Include="Services\INetworkActivityService.cs" />
     <Compile Include="Services\IStatusIndicatorService.cs" />
     <Compile Include="Services\JsonHttpClientService.cs" />
+    <Compile Include="Services\JsonSerializationService.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Monotouch" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\iOS\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Core" />

@@ -10,17 +10,25 @@ namespace Xamarin.Utilities.ViewControllers
     public class ComposerViewController : UIViewController
     {
         protected UIBarButtonItem SendItem;
-        UIViewController _previousController;
         public Action<string> ReturnAction;
         protected readonly UITextView TextView;
         protected UIView ScrollingToolbarView;
         private UIImage _normalButtonImage;
         private UIImage _pressedButtonImage;
 
+        public event Action<string> TextValueChanged;
+
         public bool EnableSendButton
         {
             get { return SendItem.Enabled; }
             set { SendItem.Enabled = value; }
+        }
+
+        protected virtual void OnTextValueChanged(string value)
+        {
+            var handle = TextValueChanged;
+            if (handle != null)
+                handle(value);
         }
 
         public ComposerViewController()
@@ -29,7 +37,9 @@ namespace Xamarin.Utilities.ViewControllers
             Title = "New Comment";
             EdgesForExtendedLayout = UIRectEdge.None;
 
-            TextView = new UITextView(ComputeComposerSize(RectangleF.Empty));
+            var textView = new CustomUITextView(ComputeComposerSize(RectangleF.Empty));
+            textView.ValueChanged += () => OnTextValueChanged(Text);
+            TextView = textView;
             TextView.Font = UIFont.SystemFontOfSize(18);
             TextView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
 
@@ -131,28 +141,6 @@ namespace Xamarin.Utilities.ViewControllers
             set { TextView.Text = value; }
         }
 
-        public void CloseComposer()
-        {
-            SendItem.Enabled = true;
-            _previousController.DismissViewController(true, null);
-        }
-
-        public void Save()
-        {
-            SendItem.Enabled = false;
-            TextView.ResignFirstResponder();
-
-            try
-            {
-                if (ReturnAction != null)
-                    ReturnAction(Text);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message + " - " + e.StackTrace);
-            }
-        }
-
         void KeyboardWillShow(NSNotification notification)
         {
             var nsValue = notification.UserInfo.ObjectForKey(UIKeyboard.BoundsUserInfoKey) as NSValue;
@@ -191,15 +179,21 @@ namespace Xamarin.Utilities.ViewControllers
             base.ViewWillDisappear(animated);
             NSNotificationCenter.DefaultCenter.RemoveObserver(this);
         }
-
-        public void NewComment(UIViewController parent, Action<string> action)
+  
+        private class CustomUITextView : UITextView
         {
-            Title = Title;
-            ReturnAction = action;
-            _previousController = parent;
-            TextView.BecomeFirstResponder();
-            var nav = new UINavigationController(this);
-            parent.PresentViewController(nav, true, null);
+            public event Action ValueChanged;
+
+            public CustomUITextView(RectangleF computeComposerSize)
+                : base(computeComposerSize)
+            {
+            }
+
+            public override void DidChange(NSKeyValueChange changeKind, NSIndexSet indexes, NSString forKey)
+            {
+                base.DidChange(changeKind, indexes, forKey);
+                ValueChanged();
+            }
         }
     }
 }
