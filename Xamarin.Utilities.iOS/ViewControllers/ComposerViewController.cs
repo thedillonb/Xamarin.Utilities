@@ -15,6 +15,7 @@ namespace Xamarin.Utilities.ViewControllers
         protected UIView ScrollingToolbarView;
         private UIImage _normalButtonImage;
         private UIImage _pressedButtonImage;
+        private NSObject _observer;
 
         public event Action<string> TextValueChanged;
 
@@ -31,18 +32,31 @@ namespace Xamarin.Utilities.ViewControllers
                 handle(value);
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            _observer = NSNotificationCenter.DefaultCenter.AddObserver(UITextField.TextFieldTextDidChangeNotification, (notification) => OnTextValueChanged(TextView.Text));
+        }
+
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+
+            NSNotificationCenter.DefaultCenter.RemoveObserver(_observer);
+        }
+
         public ComposerViewController()
             : base(null, null)
         {
             Title = "New Comment";
             EdgesForExtendedLayout = UIRectEdge.None;
 
-            var textView = new CustomUITextView(ComputeComposerSize(RectangleF.Empty));
-            textView.ValueChanged += () => OnTextValueChanged(Text);
-            TextView = textView;
+            TextView = new UITextView(ComputeComposerSize(RectangleF.Empty));
             TextView.Font = UIFont.SystemFontOfSize(18);
             TextView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
 
+      
             // Work around an Apple bug in the UITextView that crashes
             if (MonoTouch.ObjCRuntime.Runtime.Arch == MonoTouch.ObjCRuntime.Arch.SIMULATOR)
                 TextView.AutocorrectionType = UITextAutocorrectionType.No;
@@ -178,22 +192,6 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewWillDisappear(animated);
             NSNotificationCenter.DefaultCenter.RemoveObserver(this);
-        }
-  
-        private class CustomUITextView : UITextView
-        {
-            public event Action ValueChanged;
-
-            public CustomUITextView(RectangleF computeComposerSize)
-                : base(computeComposerSize)
-            {
-            }
-
-            public override void DidChange(NSKeyValueChange changeKind, NSIndexSet indexes, NSString forKey)
-            {
-                base.DidChange(changeKind, indexes, forKey);
-                ValueChanged();
-            }
         }
     }
 }

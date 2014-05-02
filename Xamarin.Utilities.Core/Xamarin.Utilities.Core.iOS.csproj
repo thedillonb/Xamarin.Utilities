@@ -47,6 +47,7 @@
     <Compile Include="Services\IEnvironmentalService.cs" />
     <Compile Include="Services\IErrorService.cs" />
     <Compile Include="Services\IHttpClientService.cs" />
+    <Compile Include="Services\IJavascriptService.cs" />
     <Compile Include="Services\IJsonHttpClientService.cs" />
     <Compile Include="Services\IJsonSerializationService.cs" />
     <Compile Include="Services\INetworkActivityService.cs" />

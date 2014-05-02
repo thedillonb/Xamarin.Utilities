@@ -42,6 +42,7 @@
     <Compile Include="Services\DefaultValueService.cs" />
     <Compile Include="Services\EnvironmentalService.cs" />
     <Compile Include="Services\HttpClientService.cs" />
+    <Compile Include="Services\JavascriptService.cs" />
     <Compile Include="Services\NetworkActivityService.cs" />
     <Compile Include="Services\StatusIndicatorService.cs" />
     <Compile Include="ViewControllers\ComposerViewController.cs" />
