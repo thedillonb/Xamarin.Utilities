@@ -2,9 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5E7E39CA-0CCE-41FE-A868-EE0E567E069E}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
@@ -51,10 +49,11 @@
     <Compile Include="Views\RoundedRectView.cs" />
     <Compile Include="Views\ScrollingToolbarView.cs" />
     <Compile Include="XCallback\XCallbackQuery.cs" />
+    <Compile Include="Extensions\UITextViewExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
-      <Project>{ebba1bd0-8430-4cc1-b636-b89c505c7d1c}</Project>
+      <Project>{EBBA1BD0-8430-4CC1-B636-B89C505C7D1C}</Project>
       <Name>Xamarin.Utilities.Core.iOS</Name>
     </ProjectReference>
   </ItemGroup>

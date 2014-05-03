@@ -11,6 +11,9 @@ namespace Xamarin.Utilities.Core.Services
 
         public TData Deserialize<TData>(string data)
         {
+            if (data == null)
+                return default(TData);
+
             return JsonConvert.DeserializeObject<TData>(data);
         }
     }
