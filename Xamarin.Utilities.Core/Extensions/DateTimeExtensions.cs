@@ -37,6 +37,11 @@
             return "moments ago";
         }
 
+        public static string ToDaysAgo(this DateTime d)
+        {
+            return ToDaysAgo(new DateTimeOffset(d));
+        }
+
         public static int TotalDaysAgo(this DateTime d)
         {
             return Convert.ToInt32(Math.Round(DateTime.Now.Subtract(d.ToLocalTime()).TotalDays));
