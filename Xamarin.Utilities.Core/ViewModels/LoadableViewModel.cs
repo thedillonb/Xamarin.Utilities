@@ -1,5 +1,4 @@
-﻿using System;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System.Threading.Tasks;
 
 namespace Xamarin.Utilities.Core.ViewModels
@@ -14,7 +13,7 @@ namespace Xamarin.Utilities.Core.ViewModels
             LoadCommand.RegisterAsyncTask(x => Load());
         }
 
-        public abstract Task Load();
+        protected abstract Task Load();
     }
 }
 
