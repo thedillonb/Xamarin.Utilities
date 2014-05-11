@@ -35,7 +35,7 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\FireAndForget.cs" />
-    <Compile Include="Extensions\ICommandExtensions.cs" />
+    <Compile Include="Extensions\CommandExtensions.cs" />
     <Compile Include="Extensions\ReactiveListExtensions.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="IoC\TinyIoC.cs" />
