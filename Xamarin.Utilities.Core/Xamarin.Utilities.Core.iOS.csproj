@@ -35,6 +35,7 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\FireAndForget.cs" />
+    <Compile Include="Extensions\ICommandExtensions.cs" />
     <Compile Include="Extensions\ReactiveListExtensions.cs" />
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="IoC\TinyIoC.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Services\IStatusIndicatorService.cs" />
     <Compile Include="Services\JsonHttpClientService.cs" />
     <Compile Include="Services\JsonSerializationService.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoadableViewModel.cs" />
     <Compile Include="Persistence\Database.cs" />
   </ItemGroup>
@@ -76,7 +78,5 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
-    public abstract class LoadableViewModel : ReactiveObject
+    public abstract class LoadableViewModel : BaseViewModel
     {
         public IReactiveCommand LoadCommand { get; private set; }
 

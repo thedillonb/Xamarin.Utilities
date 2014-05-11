@@ -110,6 +110,13 @@ namespace Xamarin.Utilities.Core.Services
             }
         }
 
+#if DEBUG
+        private void SendRequest(SentryRequest request)
+        {
+            Console.WriteLine("Would have sent Sentry Dump to {0}:{1}:{2}", _sentryUrl, _sentryClientId, _sentrySecret);
+            Console.WriteLine(_jsonSerialization.Serialize(request));
+        }
+#else
         private void SendRequest(SentryRequest request)
         {
             var header = String.Format("Sentry sentry_version={0}"
@@ -123,7 +130,6 @@ namespace Xamarin.Utilities.Core.Services
                 _sentryClientId,
                 _sentrySecret);
 
-
             var req = new HttpRequestMessage(HttpMethod.Post, new Uri(_sentryUrl));
             req.Headers.Add("X-Sentry-Auth", header);
             var requestData = _jsonSerialization.Serialize(request);
@@ -134,6 +140,7 @@ namespace Xamarin.Utilities.Core.Services
                     Debug.WriteLine("Unable to send sentry analytic");
             });
         }
+#endif
 
         private class SentryRequest
         {
