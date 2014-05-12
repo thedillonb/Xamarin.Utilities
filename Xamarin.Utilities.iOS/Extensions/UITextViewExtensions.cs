@@ -8,7 +8,7 @@ namespace Xamarin.Utilities.Extensions
 {
     public static class UITextViewExtensions
     {
-        public static void CreateAccessoryInputView(this UITextView This, IEnumerable<UIButton> buttons)
+        public static void CreateAccessoryInputView(this UITextView @this, IEnumerable<UIButton> buttons)
         {
             var normalButtonImage = ImageFromColor(UIColor.White);
             var pressedButtonImage = ImageFromColor(UIColor.FromWhiteAlpha(0.0f, 0.4f));
@@ -20,9 +20,9 @@ namespace Xamarin.Utilities.Extensions
             }
 
             var height = CalculateHeight(UIApplication.SharedApplication.StatusBarOrientation);
-            var s = new ScrollingToolbarView(new RectangleF(0, 0, This.Bounds.Width, height), buttons);
-            s.BackgroundColor = UIColor.FromWhiteAlpha(0.7f, 1.0f);
-            This.InputAccessoryView = s;
+            var s = new ScrollingToolbarView(new RectangleF(0, 0, @this.Bounds.Width, height), buttons);
+            s.BackgroundColor = UIColor.FromRGB(212, 214, 219);
+            @this.InputAccessoryView = s;
         }
 
         private static UIImage ImageFromColor(UIColor color)
@@ -48,7 +48,6 @@ namespace Xamarin.Utilities.Extensions
         public static UIButton CreateAccessoryButton(this UITextView This, string title, Action action)
         {
             var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 22 : 28f;
-
             var btn = new UIButton(UIButtonType.System);
             btn.Frame = new RectangleF(0, 0, 32, 32);
             btn.SetTitle(title, UIControlState.Normal);
