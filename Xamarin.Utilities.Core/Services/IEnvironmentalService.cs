@@ -1,6 +1,6 @@
 ﻿namespace Xamarin.Utilities.Core.Services
 {
-    public interface IEnvironmentService
+    public interface IEnvironmentalService
     {
         string OSVersion { get; }
 

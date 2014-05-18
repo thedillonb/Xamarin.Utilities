@@ -5,7 +5,7 @@ using Xamarin.Utilities.Core.Services;
 
 namespace Xamarin.Utilities.Services
 {
-    public class EnvironmentService : IEnvironmentService
+    public class EnvironmentalService : IEnvironmentalService
     {
         private static Tuple<int, int> iOSVersion
         {
@@ -52,6 +52,9 @@ namespace Xamarin.Utilities.Services
                     bundleVersion = NSBundle.MainBundle.InfoDictionary["CFBundleVersion"].ToString();
                 }
                 catch { }
+
+                if (string.Equals(shortVersion, bundleVersion))
+                    return shortVersion;
 
                 return string.IsNullOrEmpty(bundleVersion) ? shortVersion : string.Format("{0} ({1})", shortVersion, bundleVersion);
             }

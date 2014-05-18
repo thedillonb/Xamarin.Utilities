@@ -12,7 +12,7 @@ namespace Xamarin.Utilities.Core.Services
         private readonly static string CrashReportFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "crash_report.json");
         private readonly IJsonSerializationService _jsonSerialization;
         private readonly HttpClient _httpClient;
-        private readonly IEnvironmentService _environmentService;
+        private readonly IEnvironmentalService _environmentService;
         private string _sentryUrl;
         private string _sentryClientId;
         private string _sentrySecret;
@@ -22,7 +22,7 @@ namespace Xamarin.Utilities.Core.Services
             get { return System.IO.File.Exists(CrashReportFile); }
         }
 
-        public ErrorService(IHttpClientService httpClient, IJsonSerializationService jsonSerialization, IEnvironmentService environmentService)
+        public ErrorService(IHttpClientService httpClient, IJsonSerializationService jsonSerialization, IEnvironmentalService environmentService)
         {
             _jsonSerialization = jsonSerialization;
             _environmentService = environmentService;
