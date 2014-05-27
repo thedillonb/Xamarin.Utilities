@@ -6,7 +6,7 @@ namespace Xamarin.Utilities.Core.ViewModels
     {
         public IReactiveCommand DismissCommand { get; private set; }
 
-        public BaseViewModel()
+        protected BaseViewModel()
         {
             DismissCommand = new ReactiveCommand();
         }

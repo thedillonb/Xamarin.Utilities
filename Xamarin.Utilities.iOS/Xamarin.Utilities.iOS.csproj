@@ -9,6 +9,8 @@
     <RootNamespace>Xamarin.Utilities</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xamarin.Utilities</AssemblyName>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +54,7 @@
     <Compile Include="XCallback\XCallbackQuery.cs" />
     <Compile Include="Extensions\UITextViewExtensions.cs" />
     <Compile Include="Images\BackgroundHelper.cs" />
+    <Compile Include="ViewControllers\ViewModelViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">

@@ -15,7 +15,7 @@ namespace Xamarin.Utilities.Images
             }     
         }
 
-        public static UIColor CreateRepeatingBackground()
+        public static UIImage LoadSplashImage()
         {
             UIImage bgImage = null;
             if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
@@ -29,7 +29,12 @@ namespace Xamarin.Utilities.Images
                 else
                     bgImage = UIImageHelper.FromFileAuto("Default-Landscape");
             }
+            return bgImage;
+        }
 
+        public static UIColor CreateRepeatingBackground()
+        {
+            UIImage bgImage = LoadSplashImage();
             if (bgImage == null)
                 return null;
 
