@@ -9,8 +9,6 @@
     <RootNamespace>Xamarin.Utilities</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xamarin.Utilities</AssemblyName>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +53,7 @@
     <Compile Include="Extensions\UITextViewExtensions.cs" />
     <Compile Include="Images\BackgroundHelper.cs" />
     <Compile Include="ViewControllers\ViewModelViewController.cs" />
+    <Compile Include="ViewControllers\WebBrowserViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
@@ -80,4 +79,13 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\back%402x.png" />
+    <BundleResource Include="Resources\forward.png" />
+    <BundleResource Include="Resources\forward%402x.png" />
+  </ItemGroup>
 </Project>
