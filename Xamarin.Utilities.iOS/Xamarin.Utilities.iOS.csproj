@@ -54,6 +54,7 @@
     <Compile Include="Images\BackgroundHelper.cs" />
     <Compile Include="ViewControllers\ViewModelViewController.cs" />
     <Compile Include="ViewControllers\WebBrowserViewController.cs" />
+    <Compile Include="Extensions\ViewControllerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">

@@ -52,7 +52,7 @@ namespace Xamarin.Utilities.ViewControllers
             Title = "New Comment";
             EdgesForExtendedLayout = UIRectEdge.None;
 
-            TextView = new UITextView(ComputeComposerSize(RectangleF.Empty));
+            TextView = new UITextView();
             TextView.Font = UIFont.SystemFontOfSize(18);
             TextView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
 
@@ -61,10 +61,17 @@ namespace Xamarin.Utilities.ViewControllers
             if (MonoTouch.ObjCRuntime.Runtime.Arch == MonoTouch.ObjCRuntime.Arch.SIMULATOR)
                 TextView.AutocorrectionType = UITextAutocorrectionType.No;
 
-            View.AddSubview(TextView);
 
             _normalButtonImage = ImageFromColor(UIColor.White);
             _pressedButtonImage = ImageFromColor(UIColor.FromWhiteAlpha(0.0f, 0.4f));
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            TextView.Frame = ComputeComposerSize(RectangleF.Empty);
+            View.AddSubview(TextView);
         }
 
         private UIImage ImageFromColor(UIColor color)
