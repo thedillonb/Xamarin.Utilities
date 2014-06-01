@@ -1,28 +1,35 @@
-﻿using System;
-using MonoTouch.UIKit;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Xamarin.Utilities.Core.ViewModels;
+using MonoTouch.Foundation;
+using System;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public abstract class ViewModelViewController<TViewModel> : UIViewController where TViewModel : ReactiveObject
+    public abstract class ViewModelViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : ReactiveObject
     {
-        private readonly TViewModel _viewModel = IoC.Resolve<TViewModel>();
+        public TViewModel ViewModel { get; set; }
 
-        /// <summary>
-        /// Gets the view model.
-        /// </summary>
-        /// <value>The view model.</value>
-        public TViewModel ViewModel
+        object IViewFor.ViewModel
         {
-            get { return _viewModel; }
+            get { return ViewModel; }
+            set { ViewModel = (TViewModel)value; }
         }
 
-        /// <summary>
-        /// Gets or sets whether the super class should take care of loading
-        /// </summary>
-        /// <value><c>true</c> if manual load; otherwise, <c>false</c>.</value>
         protected bool ManualLoad { get; set; }
+
+        protected ViewModelViewController()
+        {
+        }
+
+        protected ViewModelViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected ViewModelViewController(string nibNameOrNull, NSBundle nibBundleOrNull)
+            : base(nibNameOrNull, nibBundleOrNull)
+        {
+        }
 
         public override void ViewDidLoad()
         {
@@ -30,7 +37,7 @@ namespace Xamarin.Utilities.ViewControllers
 
             if (!ManualLoad)
             {
-                var loadableViewModel = _viewModel as LoadableViewModel;
+                var loadableViewModel = ViewModel as LoadableViewModel;
                 if (loadableViewModel != null)
                     loadableViewModel.LoadCommand.Execute(null);
             }

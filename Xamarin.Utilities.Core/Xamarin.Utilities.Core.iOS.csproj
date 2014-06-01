@@ -9,8 +9,6 @@
     <RootNamespace>Xamarin.Utilities.Core</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xamarin.Utilities.Core</AssemblyName>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +59,9 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoadableViewModel.cs" />
     <Compile Include="Persistence\Database.cs" />
+    <Compile Include="Services\ViewModelViewService.cs" />
+    <Compile Include="Services\IViewModelViewService.cs" />
+    <Compile Include="Services\ITransitionOrchestrationService.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

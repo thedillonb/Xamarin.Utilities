@@ -78,6 +78,15 @@
     <Reference Include="System.Reactive.Core">
       <HintPath>..\lib\iOS\System.Reactive.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ReactiveUI.Cocoa">
+      <HintPath>..\lib\iOS\ReactiveUI.Cocoa.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI.Events">
+      <HintPath>..\lib\iOS\ReactiveUI.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI.Mobile">
+      <HintPath>..\lib\iOS\ReactiveUI.Mobile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
