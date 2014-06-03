@@ -12,7 +12,7 @@ namespace Xamarin.Utilities.Core.Services
 
         public void RegisterViewModels(System.Reflection.Assembly asm)
         {
-            foreach (var type in asm.GetTypes().Where(x => x.GetInterfaces().Any(y => y == typeof(IViewFor))))
+            foreach (var type in asm.GetTypes().Where(x => !x.IsAbstract && x.GetInterfaces().Any(y => y == typeof(IViewFor))))
             {
                 var viewForType = type.GetInterfaces().FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IViewFor<>));
                 Register(viewForType.GetGenericArguments()[0], type);

@@ -1,6 +1,5 @@
 ﻿using System;
 using ReactiveUI;
-using Xamarin.Utilities.Core.ViewModels;
 
 namespace Xamarin.Utilities.Core.Services
 {

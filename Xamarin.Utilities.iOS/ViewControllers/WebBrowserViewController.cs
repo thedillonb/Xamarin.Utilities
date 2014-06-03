@@ -3,10 +3,11 @@ using MonoTouch.UIKit;
 using Xamarin.Utilities.Core.Services;
 using Xamarin.Utilities.Core.ViewModels;
 using MonoTouch.Foundation;
+using ReactiveUI;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class WebBrowserViewController : UIViewController
+    public class WebBrowserViewController : UIViewController, IViewFor<WebBrowserViewModel>
     {
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
         protected UIBarButtonItem BackButton;
@@ -15,6 +16,14 @@ namespace Xamarin.Utilities.ViewControllers
 
         public UIWebView Web { get; private set; }
         private readonly bool _navigationToolbar;
+
+        public WebBrowserViewModel ViewModel { get; set; }
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (WebBrowserViewModel)value; }
+        }
 
         protected virtual void GoBack()
         {
@@ -114,6 +123,7 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewDidLoad();
             Add(Web);
+            GoUrl(new NSUrl(ViewModel.Url));
         }
 
         public override void ViewWillLayoutSubviews()

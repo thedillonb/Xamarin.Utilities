@@ -62,6 +62,7 @@
     <Compile Include="Services\ViewModelViewService.cs" />
     <Compile Include="Services\IViewModelViewService.cs" />
     <Compile Include="Services\ITransitionOrchestrationService.cs" />
+    <Compile Include="ViewModels\WebBrowserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
