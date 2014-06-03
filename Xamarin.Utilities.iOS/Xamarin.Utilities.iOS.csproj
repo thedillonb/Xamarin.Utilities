@@ -55,6 +55,7 @@
     <Compile Include="ViewControllers\ViewModelViewController.cs" />
     <Compile Include="ViewControllers\WebBrowserViewController.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
+    <Compile Include="ViewControllers\WebViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
