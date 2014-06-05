@@ -43,6 +43,7 @@
     <Compile Include="Services\HttpClientService.cs" />
     <Compile Include="Services\JavascriptService.cs" />
     <Compile Include="Services\NetworkActivityService.cs" />
+    <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\StatusIndicatorService.cs" />
     <Compile Include="ViewControllers\ComposerViewController.cs" />
     <Compile Include="ViewControllers\LiteComposerViewController.cs" />

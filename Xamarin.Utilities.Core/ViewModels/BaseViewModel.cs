@@ -26,5 +26,15 @@ namespace Xamarin.Utilities.Core.ViewModels
             view.ViewModel = viewModel;
             IoC.Resolve<ITransitionOrchestrationService>().Transition(this.View, view);
         }
+
+        /// <summary>
+        /// Gets the service.
+        /// </summary>
+        /// <typeparam name="TService">The type of the service.</typeparam>
+        /// <returns>An instance of the service.</returns>
+        protected TService GetService<TService>() where TService : class
+        {
+            return IoC.Resolve<TService>();
+        }
     }
 }
