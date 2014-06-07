@@ -28,10 +28,10 @@ namespace Xamarin.Utilities.Core.Services
             _viewModelViewDictionary.Add(viewModelType, viewType);
         }
 
-        public IViewFor<TViewModel> GetViewFor<TViewModel>(TViewModel viewModel) where TViewModel : class
+        public IViewFor GetViewFor<TViewModel>(TViewModel viewModel) where TViewModel : class
         {
             var viewType = _viewModelViewDictionary[viewModel.GetType()];
-            return viewType == null ? null : (IViewFor<TViewModel>)IoC.Resolve(viewType);
+            return viewType == null ? null : (IViewFor)IoC.Resolve(viewType);
 
         }
     }

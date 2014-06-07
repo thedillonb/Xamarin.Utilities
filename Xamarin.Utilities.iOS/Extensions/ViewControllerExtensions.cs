@@ -11,7 +11,16 @@ public static class ViewControllerExtensions
         var view = IoC.Resolve<IViewModelViewService>().GetViewFor(viewModel);
         viewModel.View = view;
         view.ViewModel = viewModel;
-        return view;
+        return (IViewFor<TViewModel>)view;
+    }
+
+    public static void CreateTopBackground(this UITableViewController viewController, UIColor color)
+    {
+        var frame = viewController.TableView.Bounds;
+        frame.Y = -frame.Size.Height;
+        var view = new UIView(frame);
+        view.BackgroundColor = color;
+        viewController.TableView.InsertSubview(view, 0);
     }
 }
 

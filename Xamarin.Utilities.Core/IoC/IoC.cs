@@ -33,6 +33,13 @@ public static class IoC
         TinyIoC.TinyIoCContainer.Current.Register(tInterface, tConcrete).AsSingleton();
     }
 
+    public static void RegisterAsInstance<TInterface, TConcrete>()        
+        where TInterface : class
+        where TConcrete : class, TInterface
+    {
+        TinyIoC.TinyIoCContainer.Current.Register<TInterface, TConcrete>().AsMultiInstance();
+    }
+
     public static void Register<T>(T instance) where T : class
     {
         TinyIoC.TinyIoCContainer.Current.Register<T>(instance);

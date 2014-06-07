@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ReactiveUI;
+using System.Collections.Generic;
 
 namespace Xamarin.Utilities.Core.ReactiveAddons
 {
@@ -53,6 +54,15 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
                 _moreTask = value;
                 raisePropertyChanged(new PropertyChangedEventArgs("MoreTask"));
             }
+        }
+
+        public ReactiveCollection()
+        {
+        }
+
+        public ReactiveCollection(IEnumerable<T> values)
+            : base(values)
+        {
         }
     }
 }

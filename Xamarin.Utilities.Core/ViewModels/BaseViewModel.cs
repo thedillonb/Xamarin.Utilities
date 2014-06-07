@@ -1,9 +1,10 @@
 using ReactiveUI;
 using Xamarin.Utilities.Core.Services;
+using System;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
-    public abstract class BaseViewModel : ReactiveObject
+    public abstract class BaseViewModel : ReactiveObject, IBaseViewModel
     {
         public IReactiveCommand DismissCommand { get; private set; }
 
@@ -14,12 +15,17 @@ namespace Xamarin.Utilities.Core.ViewModels
             DismissCommand = new ReactiveCommand();
         }
 
+        public IBaseViewModel CreateViewModel(Type type)
+        {
+            return IoC.Resolve(type) as IBaseViewModel;
+        }
+
         public TViewModel CreateViewModel<TViewModel>() where TViewModel : class
         {
             return GetService<TViewModel>();
         }
 
-        public void ShowViewModel<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
+        public void ShowViewModel<TViewModel>(TViewModel viewModel) where TViewModel : class, IBaseViewModel
         {
             var view = GetService<IViewModelViewService>().GetViewFor(viewModel);
             viewModel.View = view;

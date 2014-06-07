@@ -5,7 +5,7 @@ using System;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public abstract class ViewModelViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : ReactiveObject
+    public abstract class ViewModelViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
     {
         public TViewModel ViewModel { get; set; }
 
@@ -31,15 +31,17 @@ namespace Xamarin.Utilities.ViewControllers
         {
         }
 
-        public override void ViewDidLoad()
+        private bool _isLoaded;
+        public override void ViewDidAppear(bool animated)
         {
-            base.ViewDidLoad();
+            base.ViewDidAppear(animated);
 
-            if (!ManualLoad)
+            if (!ManualLoad && !_isLoaded)
             {
                 var loadableViewModel = ViewModel as LoadableViewModel;
                 if (loadableViewModel != null)
                     loadableViewModel.LoadCommand.Execute(null);
+                _isLoaded = true;
             }
         }
     }
