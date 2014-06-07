@@ -10,11 +10,11 @@ namespace Xamarin.Utilities.ViewControllers
     {
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
         private bool _domLoaded = false;
-        private List<string> _toBeExecuted = new List<string>();
+        private readonly List<string> _toBeExecuted = new List<string>();
 
         public UIWebView Web { get; private set; }
 
-        public WebViewController()
+        protected WebViewController()
         {
             NavigationItem.BackBarButtonItem = new UIBarButtonItem() { Title = "" };
             Web = new UIWebView {ScalesPageToFit = true};
@@ -37,6 +37,7 @@ namespace Xamarin.Utilities.ViewControllers
                     _domLoaded = true;
                     foreach (var e in _toBeExecuted)
                         Web.EvaluateJavascript(e);
+                    _toBeExecuted.Clear();
                 }
                 else if(func.Equals("comment")) 
                 {

@@ -14,17 +14,17 @@ namespace Xamarin.Utilities.Core.ViewModels
             DismissCommand = new ReactiveCommand();
         }
 
-        protected TViewModel CreateViewModel<TViewModel>() where TViewModel : class
+        public TViewModel CreateViewModel<TViewModel>() where TViewModel : class
         {
-            return IoC.Resolve<TViewModel>();
+            return GetService<TViewModel>();
         }
 
-        protected void ShowViewModel<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
+        public void ShowViewModel<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
         {
-            var view = IoC.Resolve<IViewModelViewService>().GetViewFor(viewModel);
+            var view = GetService<IViewModelViewService>().GetViewFor(viewModel);
             viewModel.View = view;
             view.ViewModel = viewModel;
-            IoC.Resolve<ITransitionOrchestrationService>().Transition(this.View, view);
+            GetService<ITransitionOrchestrationService>().Transition(View, view);
         }
 
         /// <summary>
