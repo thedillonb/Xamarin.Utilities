@@ -3,40 +3,27 @@ using System.Collections.Generic;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using ReactiveUI;
+using Xamarin.Utilities.Core.ViewModels;
 using Xamarin.Utilities.Views;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class ComposerViewController : UIViewController
+    public class ComposerViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : ComposerViewModel
     {
         protected UIBarButtonItem SendItem;
-        public Action<string> ReturnAction;
         protected readonly UITextView TextView;
         protected UIView ScrollingToolbarView;
-        private UIImage _normalButtonImage;
-        private UIImage _pressedButtonImage;
+        private readonly UIImage _normalButtonImage;
+        private readonly UIImage _pressedButtonImage;
         private NSObject _observer;
-
-        public event Action<string> TextValueChanged;
-
-        public bool EnableSendButton
-        {
-            get { return SendItem.Enabled; }
-            set { SendItem.Enabled = value; }
-        }
-
-        protected virtual void OnTextValueChanged(string value)
-        {
-            var handle = TextValueChanged;
-            if (handle != null)
-                handle(value);
-        }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
 
-            _observer = NSNotificationCenter.DefaultCenter.AddObserver(UITextField.TextFieldTextDidChangeNotification, (notification) => OnTextValueChanged(TextView.Text));
+            _observer = NSNotificationCenter.DefaultCenter.AddObserver(UITextField.TextFieldTextDidChangeNotification,
+                notification => ViewModel.Text = TextView.Text);
         }
 
         public override void ViewDidDisappear(bool animated)
@@ -49,18 +36,19 @@ namespace Xamarin.Utilities.ViewControllers
         public ComposerViewController()
             : base(null, null)
         {
+
             Title = "New Comment";
             EdgesForExtendedLayout = UIRectEdge.None;
 
-            TextView = new UITextView();
-            TextView.Font = UIFont.SystemFontOfSize(18);
-            TextView.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
+            TextView = new UITextView
+            {
+                Font = UIFont.SystemFontOfSize(18),
+                AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
+            };
 
-      
             // Work around an Apple bug in the UITextView that crashes
             if (MonoTouch.ObjCRuntime.Runtime.Arch == MonoTouch.ObjCRuntime.Arch.SIMULATOR)
                 TextView.AutocorrectionType = UITextAutocorrectionType.No;
-
 
             _normalButtonImage = ImageFromColor(UIColor.White);
             _pressedButtonImage = ImageFromColor(UIColor.FromWhiteAlpha(0.0f, 0.4f));
@@ -112,16 +100,14 @@ namespace Xamarin.Utilities.ViewControllers
             btn.Layer.CornerRadius = 7f;
             btn.Layer.MasksToBounds = true;
             btn.AdjustsImageWhenHighlighted = false;
-            btn.TouchUpInside += (object sender, System.EventArgs e) => action();
+            btn.TouchUpInside += (sender, e) => action();
             return btn;
         }
 
-        private float CalculateHeight(UIInterfaceOrientation orientation)
+        private static float CalculateHeight(UIInterfaceOrientation orientation)
         {
             if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
                 return 44;
-
-            // If  pad
             if (orientation == UIInterfaceOrientation.Portrait || orientation == UIInterfaceOrientation.PortraitUpsideDown)
                 return 64;
             return 88f;
@@ -142,7 +128,7 @@ namespace Xamarin.Utilities.ViewControllers
             }
         }
 
-        public void SetAccesoryButtons(IEnumerable<UIButton> buttons)
+        public void SetAccesoryButtons(ICollection<UIButton> buttons)
         {
             foreach (var button in buttons)
             {
@@ -154,12 +140,6 @@ namespace Xamarin.Utilities.ViewControllers
             ScrollingToolbarView = new ScrollingToolbarView(new RectangleF(0, 0, View.Bounds.Width, height), buttons);
             ScrollingToolbarView.BackgroundColor = UIColor.FromWhiteAlpha(0.7f, 1.0f);
             TextView.InputAccessoryView = ScrollingToolbarView;
-        }
-
-        public string Text
-        {
-            get { return TextView.Text; }
-            set { TextView.Text = value; }
         }
 
         void KeyboardWillShow(NSNotification notification)
@@ -200,5 +180,13 @@ namespace Xamarin.Utilities.ViewControllers
             base.ViewWillDisappear(animated);
             NSNotificationCenter.DefaultCenter.RemoveObserver(this);
         }
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = (TViewModel)value; }
+        }
+
+        public TViewModel ViewModel { get; set; }
     }
 }

@@ -56,7 +56,7 @@
     <Compile Include="ViewControllers\ViewModelViewController.cs" />
     <Compile Include="ViewControllers\WebBrowserViewController.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
-    <Compile Include="ViewControllers\WebViewController.cs" />
+    <Compile Include="ViewControllers\WebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
@@ -91,9 +91,7 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="Resources\back.png" />
     <BundleResource Include="Resources\back%402x.png" />

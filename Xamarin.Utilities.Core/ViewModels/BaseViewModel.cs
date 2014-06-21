@@ -1,3 +1,4 @@
+using System.Reactive.Linq;
 using ReactiveUI;
 using Xamarin.Utilities.Core.Services;
 using System;
@@ -8,11 +9,21 @@ namespace Xamarin.Utilities.Core.ViewModels
     {
         public IReactiveCommand DismissCommand { get; private set; }
 
+        public IReactiveCommand GoToUrlCommand { get; private set; }
+
         public IViewFor View { get; set; }
 
         protected BaseViewModel()
         {
             DismissCommand = new ReactiveCommand();
+
+            GoToUrlCommand = new ReactiveCommand();
+            GoToUrlCommand.OfType<string>().Subscribe(x =>
+            {
+                var vm = CreateViewModel<WebBrowserViewModel>();
+                vm.Url = x;
+                ShowViewModel(vm);
+            });
         }
 
         public IBaseViewModel CreateViewModel(Type type)

@@ -8,20 +8,8 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
 {
     public class ReactiveCollection<T> : ReactiveList<T>
     {
-        private Func<T, bool> _filterFunc;
-        public Func<T, bool> FilterFunc
-        {
-            get { return _filterFunc; }
-            set
-            {
-                if (_filterFunc == value) return;
-                _filterFunc = value;
-                raisePropertyChanged(new PropertyChangedEventArgs("FilterFunc"));
-            }
-        }
-
-        private Func<T, object> _orderFunc;
-        public Func<T, object> OrderFunc
+        private Func<IEnumerable<T>, IEnumerable<T>> _orderFunc;
+        public Func<IEnumerable<T>, IEnumerable<T>> OrderFunc
         {
             get { return _orderFunc; }
             set

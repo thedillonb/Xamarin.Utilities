@@ -6,13 +6,20 @@ namespace Xamarin.Utilities.Services
 {
     public class AlertDialogService : IAlertDialogService
     {
+        // ReSharper disable once NotAccessedField.Local
+        private UIAlertView _alertView;
+
         public Task<bool> PromptYesNo(string title, string message)
         {
             var tcs = new TaskCompletionSource<bool>();
-            var alert = new UIAlertView { Title = title, Message = message };
+            var alert = _alertView = new UIAlertView { Title = title, Message = message };
             alert.CancelButtonIndex = alert.AddButton("No");
             var ok = alert.AddButton("Yes");
-            alert.Clicked += (sender, e) => tcs.SetResult(e.ButtonIndex == ok);
+            alert.Clicked += (sender, e) =>
+            {
+                tcs.SetResult(e.ButtonIndex == ok);
+                _alertView = null;
+            };
             alert.Show();
             return tcs.Task;
         }
@@ -20,9 +27,13 @@ namespace Xamarin.Utilities.Services
         public Task Alert(string title, string message)
         {
             var tcs = new TaskCompletionSource<object>();
-            var alert = new UIAlertView { Title = title, Message = message };
+            var alert = _alertView = new UIAlertView { Title = title, Message = message };
             alert.DismissWithClickedButtonIndex(alert.AddButton("Ok"), true);
-            alert.Dismissed += (sender, e) => tcs.SetResult(null);
+            alert.Dismissed += (sender, e) =>
+            {
+                tcs.SetResult(null);
+                _alertView = null;
+            };
             alert.Show();
             return tcs.Task;
         }
@@ -30,7 +41,7 @@ namespace Xamarin.Utilities.Services
         public Task<string> PromptTextBox(string title, string message, string defaultValue, string okTitle)
         {
             var tcs = new TaskCompletionSource<string>();
-            var alert = new UIAlertView();
+            var alert = _alertView = new UIAlertView();
             alert.Title = title;
             alert.Message = message;
             alert.AlertViewStyle = UIAlertViewStyle.PlainTextInput;
@@ -45,6 +56,7 @@ namespace Xamarin.Utilities.Services
                     tcs.SetResult(alert.GetTextField(0).Text);
                 else
                     tcs.SetCanceled();
+                _alertView = null;
             };
             alert.Show();
             return tcs.Task;

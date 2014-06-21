@@ -7,6 +7,8 @@ namespace Xamarin.Utilities.Core.ViewModels
     {
         IReactiveCommand DismissCommand { get; }
 
+        IReactiveCommand GoToUrlCommand { get; }
+
         IViewFor View { get; set; }
     }
 }
