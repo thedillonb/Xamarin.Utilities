@@ -89,7 +89,7 @@ namespace Xamarin.Utilities.Views
 
         public void Show()
         {
-            var window = UIApplication.SharedApplication.KeyWindow.RootViewController.View;
+            var window = UIApplication.SharedApplication.Delegate.Window.RootViewController.View;
             Frame = window.Bounds;
             window.AddSubview(this);
             Present();

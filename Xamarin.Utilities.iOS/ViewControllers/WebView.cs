@@ -75,7 +75,6 @@ namespace Xamarin.Utilities.ViewControllers
         public override void ViewDidLoad()
         {
             NavigationItem.BackBarButtonItem = new UIBarButtonItem { Title = "" };
-            EdgesForExtendedLayout = UIRectEdge.None;
             base.ViewDidLoad();
             Add(Web);
         }
@@ -114,7 +113,7 @@ namespace Xamarin.Utilities.ViewControllers
 
         protected void LoadContent(string content)
         {
-            Web.LoadHtmlString(content, NSBundle.MainBundle.BundleUrl);
+            Web.LoadHtmlString(content ?? string.Empty, NSBundle.MainBundle.BundleUrl);
         }
 
         protected void ExecuteJavascript(string data)

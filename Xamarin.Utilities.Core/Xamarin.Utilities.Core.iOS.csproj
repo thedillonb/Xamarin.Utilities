@@ -68,6 +68,7 @@
     <Compile Include="Services\ITransitionOrchestrationService.cs" />
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <Compile Include="ViewModels\IBaseViewModel.cs" />
+    <Compile Include="Services\AnalyticsService.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -85,12 +86,10 @@
     <Reference Include="System.Reactive.Core">
       <HintPath>..\lib\iOS\System.Reactive.Core.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.Interfaces">
       <HintPath>..\lib\iOS\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.Linq">
       <HintPath>..\lib\iOS\System.Reactive.Linq.dll</HintPath>
     </Reference>
   </ItemGroup>

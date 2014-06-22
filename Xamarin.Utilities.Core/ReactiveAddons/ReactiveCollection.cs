@@ -32,8 +32,8 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
             }
         }
 
-        private Task _moreTask;
-        public Task MoreTask
+        private Func<Task> _moreTask;
+        public Func<Task> MoreTask
         {
             get { return _moreTask; }
             set

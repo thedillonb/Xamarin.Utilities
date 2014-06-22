@@ -44,6 +44,11 @@ namespace Xamarin.Utilities.Core.ViewModels
             GetService<ITransitionOrchestrationService>().Transition(View, view);
         }
 
+        public void CreateAndShowViewModel<TViewModel>() where TViewModel : class, IBaseViewModel
+        {
+            ShowViewModel<TViewModel>(CreateViewModel<TViewModel>());
+        }
+
         /// <summary>
         /// Gets the service.
         /// </summary>
