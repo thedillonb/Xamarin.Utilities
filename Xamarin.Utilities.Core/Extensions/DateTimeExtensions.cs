@@ -4,7 +4,7 @@
     {
         public static string ToDaysAgo(this DateTimeOffset d)
         {
-            var dt = DateTimeOffset.Now.Subtract(d);
+            var dt = DateTimeOffset.Now.ToLocalTime().Subtract(d.ToLocalTime());
 
             if (dt.TotalDays >= 365)
             {

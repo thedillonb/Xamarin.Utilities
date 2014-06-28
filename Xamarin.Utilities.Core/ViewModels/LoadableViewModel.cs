@@ -2,6 +2,7 @@
 using ReactiveUI;
 using System.Threading.Tasks;
 using Xamarin.Utilities.Core.Services;
+using System.Reactive.Linq;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
@@ -14,7 +15,7 @@ namespace Xamarin.Utilities.Core.ViewModels
         protected LoadableViewModel()
         {
             LoadCommand = new ReactiveCommand();
-            LoadCommand.IsExecuting.Subscribe(x =>
+            LoadCommand.IsExecuting.Skip(1).Subscribe(x =>
             {
                 if (x)
                     NetworkActivityService.PushNetworkActive();

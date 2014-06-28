@@ -67,9 +67,9 @@ namespace Xamarin.Utilities.ViewControllers
             if (_navigationToolbar)
             {
                 ToolbarItems = new [] { 
-                    (BackButton = new UIBarButtonItem(UIImage.FromBundle("back"), UIBarButtonItemStyle.Plain, (s, e) => GoBack()) { Enabled = false }),
+                    (BackButton = new UIBarButtonItem(Images.Images.BackChevron, UIBarButtonItemStyle.Plain, (s, e) => GoBack()) { Enabled = false }),
                     new UIBarButtonItem(UIBarButtonSystemItem.FixedSpace) { Width = 40f },
-                    (ForwardButton = new UIBarButtonItem(UIImage.FromBundle("forward"), UIBarButtonItemStyle.Plain, (s, e) => GoForward()) { Enabled = false }),
+                    (ForwardButton = new UIBarButtonItem(Images.Images.ForwardChevron, UIBarButtonItemStyle.Plain, (s, e) => GoForward()) { Enabled = false }),
                     new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
                     (RefreshButton = new UIBarButtonItem(UIBarButtonSystemItem.Refresh, (s, e) => Refresh()))
                 };

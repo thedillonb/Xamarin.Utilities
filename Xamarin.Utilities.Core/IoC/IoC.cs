@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 public static class IoC
 {
@@ -48,6 +49,12 @@ public static class IoC
     public static T Resolve<T>() where T : class
     {
         return TinyIoC.TinyIoCContainer.Current.Resolve<T>();
+    }
+
+    public static T Resolve<T>(IDictionary<string, object> namedParameters) where T : class
+    {
+        var overloads = new TinyIoC.NamedParameterOverloads(namedParameters);
+        return TinyIoC.TinyIoCContainer.Current.Resolve<T>(overloads);
     }
 
     public static object Resolve(Type resolveType)

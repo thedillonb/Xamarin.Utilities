@@ -40,7 +40,7 @@ namespace Xamarin.Utilities.ViewControllers
             {
                 var loadableViewModel = ViewModel as LoadableViewModel;
                 if (loadableViewModel != null)
-                    loadableViewModel.LoadCommand.Execute(null);
+                    loadableViewModel.LoadCommand.ExecuteIfCan();
                 _isLoaded = true;
             }
         }

@@ -57,6 +57,7 @@
     <Compile Include="ViewControllers\WebBrowserViewController.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
     <Compile Include="ViewControllers\WebView.cs" />
+    <Compile Include="Xamarin.Utilities.bundle\Images.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
@@ -97,5 +98,12 @@
     <BundleResource Include="Resources\back%402x.png" />
     <BundleResource Include="Resources\forward.png" />
     <BundleResource Include="Resources\forward%402x.png" />
+    <BundleResource Include="Xamarin.Utilities.bundle\forward%402x.png" />
+    <BundleResource Include="Xamarin.Utilities.bundle\forward.png" />
+    <BundleResource Include="Xamarin.Utilities.bundle\back%402x.png" />
+    <BundleResource Include="Xamarin.Utilities.bundle\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Xamarin.Utilities.bundle\" />
   </ItemGroup>
 </Project>
