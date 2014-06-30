@@ -63,12 +63,13 @@
     <Compile Include="ViewModels\ComposerViewModel.cs" />
     <Compile Include="ViewModels\LoadableViewModel.cs" />
     <Compile Include="Persistence\Database.cs" />
-    <Compile Include="Services\ViewModelViewService.cs" />
+    <Compile Include="Servicess\ViewModelViewService.cs" />
     <Compile Include="Services\IViewModelViewService.cs" />
     <Compile Include="Services\ITransitionOrchestrationService.cs" />
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <Compile Include="ViewModels\IBaseViewModel.cs" />
     <Compile Include="Services\AnalyticsService.cs" />
+    <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Utilities\LRUCache.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +97,4 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Utilities\" />
-  </ItemGroup>
 </Project>
