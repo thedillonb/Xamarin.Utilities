@@ -3,11 +3,14 @@ using ReactiveUI;
 using Xamarin.Utilities.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
-    public abstract class BaseViewModel : ReactiveObject, IBaseViewModel
+    public abstract class BaseViewModel : ReactiveObject, IBaseViewModel, ISupportsActivation
     {
+        private readonly ViewModelActivator _viewModelActivator;
+
         public IReactiveCommand DismissCommand { get; private set; }
 
         public IReactiveCommand GoToUrlCommand { get; private set; }
@@ -16,6 +19,8 @@ namespace Xamarin.Utilities.Core.ViewModels
 
         protected BaseViewModel()
         {
+            _viewModelActivator = new ViewModelActivator();
+
             DismissCommand = new ReactiveCommand();
 
             GoToUrlCommand = new ReactiveCommand();
@@ -65,6 +70,11 @@ namespace Xamarin.Utilities.Core.ViewModels
         protected TService GetService<TService>() where TService : class
         {
             return IoC.Resolve<TService>();
+        }
+
+        ViewModelActivator ISupportsActivation.Activator
+        {
+            get { return _viewModelActivator; }
         }
     }
 }
