@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <Compile Include="ViewModels\IBaseViewModel.cs" />
     <Compile Include="Services\AnalyticsService.cs" />
+    <Compile Include="Utilities\LRUCache.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
@@ -95,4 +96,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+  </ItemGroup>
 </Project>

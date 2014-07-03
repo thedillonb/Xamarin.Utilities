@@ -32,9 +32,13 @@ namespace Xamarin.Utilities.ViewControllers
         }
 
         private bool _isLoaded;
-        public override void ViewDidAppear(bool animated)
+        public override void ViewWillAppear(bool animated)
         {
-            base.ViewDidAppear(animated);
+            base.ViewWillAppear(animated);
+
+            var activatable = ViewModel as ISupportsActivation;
+            if (activatable != null)
+                activatable.Activator.Activate();
 
             if (!ManualLoad && !_isLoaded)
             {
@@ -43,6 +47,15 @@ namespace Xamarin.Utilities.ViewControllers
                     loadableViewModel.LoadCommand.ExecuteIfCan();
                 _isLoaded = true;
             }
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            var activatable = ViewModel as ISupportsActivation;
+            if (activatable != null)
+                activatable.Activator.Deactivate();
         }
     }
 }
