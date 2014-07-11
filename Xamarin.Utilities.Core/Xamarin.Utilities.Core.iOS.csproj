@@ -63,7 +63,6 @@
     <Compile Include="ViewModels\ComposerViewModel.cs" />
     <Compile Include="ViewModels\LoadableViewModel.cs" />
     <Compile Include="Persistence\Database.cs" />
-    <Compile Include="Servicess\ViewModelViewService.cs" />
     <Compile Include="Services\IViewModelViewService.cs" />
     <Compile Include="Services\ITransitionOrchestrationService.cs" />
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Utilities\LRUCache.cs" />
     <Compile Include="ViewModels\ILoadableViewModel.cs" />
+    <Compile Include="Services\ViewModelViewService.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
