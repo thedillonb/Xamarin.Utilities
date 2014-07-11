@@ -6,7 +6,7 @@ using System.Reactive.Linq;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
-    public abstract class LoadableViewModel : BaseViewModel
+    public abstract class LoadableViewModel : BaseViewModel, ILoadableViewModel
     {
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
 

@@ -96,11 +96,11 @@ namespace Xamarin.Utilities.DialogElements
 
                     for (var i = 0; i < _buttons.Length; i++)
                     {
-                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 0.5f, this.Bounds.Height);
+                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 1f, Bounds.Height);
                         _buttons[i].LayoutSubviews();
 
                         if (i != _buttons.Length - 1)
-                            _seperatorViews[i].Frame = new RectangleF(_buttons[i].Frame.Right, 0, 0.5f, this.Bounds.Height);
+                            _seperatorViews[i].Frame = new RectangleF(_buttons[i].Frame.Right, 0, 0.5f, Bounds.Height);
                     }
                 }
             }

@@ -64,10 +64,10 @@ namespace Xamarin.Utilities.DialogElements
     /// </summary>
     public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground 
     {
-        public static UIFont  DefaultTitleFont = UIFont.SystemFontOfSize(15f);
-        public static UIFont  DefaultDetailFont = UIFont.SystemFontOfSize(14f);
+        public static UIFont  DefaultTitleFont = UIFont.SystemFontOfSize(16f);
+        public static UIFont  DefaultDetailFont = UIFont.SystemFontOfSize(13f);
         public static UIColor DefaultTitleColor = UIColor.FromRGB(41, 41, 41);
-        public static UIColor DefaultDetailColor = UIColor.FromRGB(120, 120, 120);
+        public static UIColor DefaultDetailColor = UIColor.FromRGB(100, 100, 100);
         public static UIColor BgColor = UIColor.White;
 
         static NSString [] skey = { new NSString (".1"), new NSString (".2"), new NSString (".3"), new NSString (".4") };

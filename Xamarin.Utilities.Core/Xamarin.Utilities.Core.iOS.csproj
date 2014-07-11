@@ -71,6 +71,7 @@
     <Compile Include="Services\AnalyticsService.cs" />
     <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Utilities\LRUCache.cs" />
+    <Compile Include="ViewModels\ILoadableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

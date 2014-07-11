@@ -7,9 +7,9 @@ namespace Xamarin.Utilities.DialogElements
 {
     public class SplitButtonElement : Element
     {
-        public static UIColor CaptionColor = UIColor.Black;
+        public static UIColor CaptionColor = UIColor.FromRGB(41, 41, 41);
         public static UIFont CaptionFont = UIFont.SystemFontOfSize(14f);
-        public static UIColor TextColor = UIColor.LightGray;
+        public static UIColor TextColor = UIColor.FromRGB(100, 100, 100);
         public static UIFont TextFont = UIFont.BoldSystemFontOfSize(14f);
         private readonly List<SplitButton> _buttons = new List<SplitButton>();
 
@@ -99,11 +99,11 @@ namespace Xamarin.Utilities.DialogElements
 
                     for (var i = 0; i < _buttons.Length; i++)
                     {
-                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 0.5f, this.Bounds.Height);
+                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 1f, Bounds.Height);
                         _buttons[i].LayoutSubviews();
 
                         if (i != _buttons.Length - 1)
-                            _seperatorViews[i].Frame = new RectangleF(_buttons[i].Frame.Right, 0, 0.5f, this.Bounds.Height);
+                            _seperatorViews[i].Frame = new RectangleF(_buttons[i].Frame.Right, 0, 0.5f, Bounds.Height);
                     }
                 }
             }

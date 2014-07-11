@@ -85,6 +85,10 @@
     <Compile Include="DialogElements\EntryElement.cs" />
     <Compile Include="ViewControllers\ViewModelCollectionViewController.cs" />
     <Compile Include="Extensions\ViewModelCollectionViewControllerExtensions.cs" />
+    <Compile Include="DialogElements\WebElement.cs" />
+    <Compile Include="Views\ImageAndTitleHeaderView.cs" />
+    <Compile Include="ViewControllers\ViewModelPrettyDialogViewController.cs" />
+    <Compile Include="Views\SlideupTitleView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
