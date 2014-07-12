@@ -37,7 +37,6 @@ namespace Xamarin.Utilities.DialogElements
                 try
                 {
                     var size = WebView.EvaluateJavascript("size();");
-                    Console.WriteLine("Height calulcated to: " + size);
                     if (size != null)
                         float.TryParse(size, out _height);
 
