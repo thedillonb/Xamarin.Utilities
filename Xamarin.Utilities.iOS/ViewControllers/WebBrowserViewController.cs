@@ -7,7 +7,7 @@ using ReactiveUI;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class WebBrowserViewController : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<WebBrowserViewModel>
+    public class WebBrowserViewController : ReactiveViewController, IViewFor<WebBrowserViewModel>
     {
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
         protected UIBarButtonItem BackButton;

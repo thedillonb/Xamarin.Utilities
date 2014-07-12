@@ -9,7 +9,7 @@ using Xamarin.Utilities.Views;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public abstract class ComposerViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : ComposerViewModel
+    public abstract class ComposerViewController<TViewModel> : ReactiveViewController, IViewFor<TViewModel> where TViewModel : ComposerViewModel
     {
         protected UIBarButtonItem SendItem;
         protected readonly UITextView TextView;

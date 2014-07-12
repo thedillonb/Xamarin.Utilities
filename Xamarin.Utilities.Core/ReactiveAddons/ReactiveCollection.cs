@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using ReactiveUI;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
             {
                 if (_orderFunc == value) return;
                 _orderFunc = value;
-                raisePropertyChanged(new PropertyChangedEventArgs("OrderFunc"));
+                this.RaisePropertyChanged();
             }
         }
 
@@ -28,7 +27,7 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
             {
                 if (_groupFunc == value) return;
                 _groupFunc = value;
-                raisePropertyChanged(new PropertyChangedEventArgs("GroupFunc"));
+                this.RaisePropertyChanged();
             }
         }
 
@@ -40,7 +39,7 @@ namespace Xamarin.Utilities.Core.ReactiveAddons
             {
                 if (_moreTask == value) return;
                 _moreTask = value;
-                raisePropertyChanged(new PropertyChangedEventArgs("MoreTask"));
+                this.RaisePropertyChanged();
             }
         }
 

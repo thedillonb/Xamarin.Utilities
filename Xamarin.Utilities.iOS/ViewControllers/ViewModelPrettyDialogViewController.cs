@@ -74,7 +74,7 @@ namespace Xamarin.Utilities.ViewControllers
             };
 
             var topBackgroundView = this.CreateTopBackground(HeaderView.BackgroundColor);
-            var loadableViewModel = ViewModel as LoadableViewModel;
+            var loadableViewModel = ViewModel as ILoadableViewModel;
             if (loadableViewModel != null)
             {
                 topBackgroundView.Hidden = true;

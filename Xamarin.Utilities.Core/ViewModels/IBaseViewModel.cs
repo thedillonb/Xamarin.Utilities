@@ -5,9 +5,9 @@ namespace Xamarin.Utilities.Core.ViewModels
 {
     public interface IBaseViewModel
     {
-        IReactiveCommand DismissCommand { get; }
+        IReactiveCommand<object> DismissCommand { get; }
 
-        IReactiveCommand GoToUrlCommand { get; }
+        IReactiveCommand<object> GoToUrlCommand { get; }
 
         IViewFor View { get; set; }
     }

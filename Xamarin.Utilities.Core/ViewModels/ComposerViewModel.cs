@@ -16,7 +16,7 @@ namespace Xamarin.Utilities.Core.ViewModels
 
         public ComposerViewModel()
         {
-            SaveCommand = new ReactiveCommand();
+            SaveCommand = ReactiveCommand.Create();
         }
     }
 }

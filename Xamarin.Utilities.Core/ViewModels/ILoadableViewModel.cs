@@ -2,7 +2,7 @@
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
-    public interface ILoadableViewModel
+    public interface ILoadableViewModel : IBaseViewModel
     {
         IReactiveCommand LoadCommand { get; }
     }

@@ -5,7 +5,7 @@ using System;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public abstract class ViewModelViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
+    public abstract class ViewModelViewController<TViewModel> : ReactiveViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
     {
         public TViewModel ViewModel { get; set; }
 
@@ -42,7 +42,7 @@ namespace Xamarin.Utilities.ViewControllers
 
             if (!ManualLoad && !_isLoaded)
             {
-                var loadableViewModel = ViewModel as LoadableViewModel;
+                var loadableViewModel = ViewModel as ILoadableViewModel;
                 if (loadableViewModel != null)
                     loadableViewModel.LoadCommand.ExecuteIfCan();
                 _isLoaded = true;

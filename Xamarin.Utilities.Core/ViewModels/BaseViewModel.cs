@@ -11,9 +11,9 @@ namespace Xamarin.Utilities.Core.ViewModels
     {
         private readonly ViewModelActivator _viewModelActivator;
 
-        public IReactiveCommand DismissCommand { get; private set; }
+        public IReactiveCommand<object> DismissCommand { get; private set; }
 
-        public IReactiveCommand GoToUrlCommand { get; private set; }
+        public IReactiveCommand<object> GoToUrlCommand { get; private set; }
 
         public IViewFor View { get; set; }
 
@@ -21,9 +21,9 @@ namespace Xamarin.Utilities.Core.ViewModels
         {
             _viewModelActivator = new ViewModelActivator();
 
-            DismissCommand = new ReactiveCommand();
+            DismissCommand = ReactiveCommand.Create();
 
-            GoToUrlCommand = new ReactiveCommand();
+            GoToUrlCommand = ReactiveCommand.Create();
             GoToUrlCommand.OfType<string>().Subscribe(x =>
             {
                 var vm = CreateViewModel<WebBrowserViewModel>();

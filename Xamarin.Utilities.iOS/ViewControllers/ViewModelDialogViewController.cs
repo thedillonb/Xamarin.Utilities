@@ -11,16 +11,16 @@ using System.Reactive.Subjects;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class ViewModelDialogViewController<TViewModel> : ReactiveUI.Cocoa.ReactiveTableViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
+    public class ViewModelDialogViewController<TViewModel> : ReactiveTableViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
 	{
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
         private UIRefreshControl _refreshControl;
         private bool _loaded;
         private readonly RootElement _root;
-        private UITableView _tableView;
+        private readonly UITableView _tableView;
         private Source _tableSource;
         private readonly bool _unevenRows;
-        private Subject<PointF> _scrolledSubject = new Subject<PointF>();
+        private readonly Subject<PointF> _scrolledSubject = new Subject<PointF>();
 
         public IObservable<PointF> Scrolled { get { return _scrolledSubject; } }
 
@@ -41,7 +41,7 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewDidLoad();
 
-            var loadableViewModel = ViewModel as LoadableViewModel;
+            var loadableViewModel = ViewModel as ILoadableViewModel;
             if (loadableViewModel != null)
             {
                 _refreshControl = new UIRefreshControl();
@@ -194,7 +194,7 @@ namespace Xamarin.Utilities.ViewControllers
             if (!_loaded)
             {
                 _loaded = true;
-                var loadableViewModel = ViewModel as LoadableViewModel;
+                var loadableViewModel = ViewModel as ILoadableViewModel;
                 if (loadableViewModel != null)
                     loadableViewModel.LoadCommand.ExecuteIfCan();
             }
@@ -223,7 +223,7 @@ namespace Xamarin.Utilities.ViewControllers
         public TViewModel ViewModel
         {
             get { return _viewModel; }
-            set { RaiseAndSetIfChanged(ref _viewModel, value); }
+            set { this.RaiseAndSetIfChanged(ref _viewModel, value); }
         }
 
         object IViewFor.ViewModel
