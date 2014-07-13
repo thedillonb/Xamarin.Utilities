@@ -10,7 +10,7 @@ namespace ReactiveUI
 {
     public static class ViewModelCollectionViewControllerExtensions
     {
-        public static void Bind<T, TItem>(this ViewModelCollectionViewController<T> @this, IReadOnlyReactiveList<TItem> list, Func<TItem, Element> selector) where T : class, IBaseViewModel
+        public static void BindList<T, TItem>(this ViewModelCollectionViewController<T> @this, IReadOnlyReactiveList<TItem> list, Func<TItem, Element> selector) where T : class, IBaseViewModel
         {
             list.Changed
                 .Select(_ => list)

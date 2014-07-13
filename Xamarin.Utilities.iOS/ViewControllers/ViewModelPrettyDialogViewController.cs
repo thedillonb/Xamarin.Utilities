@@ -6,6 +6,11 @@ using System.Reactive.Linq;
 
 namespace Xamarin.Utilities.ViewControllers
 {
+    public abstract class ViewModelPrettyDialogViewController
+    {
+        public static UIColor RefreshIndicatorColor = UIColor.LightGray;
+    }
+
     public abstract class ViewModelPrettyDialogViewController<TViewModel> : ViewModelDialogViewController<TViewModel> where TViewModel : class, IBaseViewModel
     {
         protected SlideUpTitleView SlideUpTitle;
@@ -63,7 +68,7 @@ namespace Xamarin.Utilities.ViewControllers
             TableView.SectionHeaderHeight = 0;
 
             if (RefreshControl != null)
-                RefreshControl.TintColor = UIColor.LightGray;
+                RefreshControl.TintColor = ViewModelPrettyDialogViewController.RefreshIndicatorColor;
 
             HeaderView = new ImageAndTitleHeaderView 
             { 

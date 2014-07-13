@@ -33,6 +33,7 @@ namespace Xamarin.Utilities.DialogElements
                 cell = new SplitButtonCell();
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
                 cell.SeparatorInset = UIEdgeInsets.Zero;
+                cell.BackgroundColor = tv.SeparatorColor;
             }
             cell.SetButtons(tv, _buttons);
 			return cell;
@@ -41,7 +42,6 @@ namespace Xamarin.Utilities.DialogElements
         private class SplitButtonCell : UITableViewCell
         {
             private UIButton[] _buttons;
-            private UIView[] _seperatorViews;
 
             public SplitButtonCell()
                 : base(UITableViewCellStyle.Default, "splitbuttonelement")
@@ -65,26 +65,6 @@ namespace Xamarin.Utilities.DialogElements
                     _buttons[i] = items[i];
                     ContentView.Add(_buttons[i]);
                 }
-
-                if (_seperatorViews != null)
-                {
-                    foreach (var v in _seperatorViews)
-                    {
-                        v.RemoveFromSuperview();
-                        v.Dispose();
-                    }
-                    _seperatorViews = null;
-                }
-
-                if (items.Count > 0)
-                {
-                    _seperatorViews = new UIView[items.Count - 1];
-                    for (var i = 0; i < _seperatorViews.Length; i++)
-                    {
-                        _seperatorViews[i] = new UIView { BackgroundColor = tableView.SeparatorColor };
-                        ContentView.Add(_seperatorViews[i]);
-                    }
-                }
             }
 
 
@@ -99,11 +79,8 @@ namespace Xamarin.Utilities.DialogElements
 
                     for (var i = 0; i < _buttons.Length; i++)
                     {
-                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 1f, Bounds.Height);
+                        _buttons[i].Frame = new RectangleF(i * space, 0, space - 0.5f, Bounds.Height);
                         _buttons[i].LayoutSubviews();
-
-                        if (i != _buttons.Length - 1)
-                            _seperatorViews[i].Frame = new RectangleF(_buttons[i].Frame.Right, 0, 0.5f, Bounds.Height);
                     }
                 }
             }
@@ -130,6 +107,8 @@ namespace Xamarin.Utilities.DialogElements
                 : base(UIButtonType.Custom)
             {
                 AutosizesSubviews = true;
+
+                BackgroundColor = UIColor.White;
 
                 _caption = new UILabel();
                 _caption.TextColor = CaptionColor;
