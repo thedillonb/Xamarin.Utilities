@@ -1,5 +1,7 @@
 ﻿using MonoTouch.UIKit;
 using System.Drawing;
+using MonoTouch.MapKit;
+using System;
 
 namespace Xamarin.Utilities.Views
 {
@@ -13,15 +15,10 @@ namespace Xamarin.Utilities.Views
             set 
             { 
                 _label.Text = value;
-                _label.SizeToFit();
+                SetNeedsLayout();
 
-                var labelFrame = _label.Frame;
-                labelFrame.Height = Frame.Height;
-                _label.Frame = labelFrame;
-
-                var f = Frame;
-                f.Width = _label.Bounds.Width;
-                Frame = f;
+                if (Superview != null)
+                    Superview.SetNeedsLayout();
             }
         }
 
@@ -38,16 +35,20 @@ namespace Xamarin.Utilities.Views
             }
         }
 
+        public override SizeF SizeThatFits(SizeF size)
+        {
+            var h = _label.SizeThatFits(size);
+            return new SizeF(h.Width, base.SizeThatFits(size).Height);
+        }
+
         public SlideUpTitleView(float height)
             : base(new RectangleF(0, 0, 10, height))
         {
-            AutosizesSubviews = true;
             AutoresizingMask = UIViewAutoresizing.FlexibleHeight;
 
-            //BackgroundColor = UIColor.Red;
             _label = new UILabel(Bounds);
             _label.Font = UIFont.SystemFontOfSize(18f);
-            _label.AutoresizingMask = UIViewAutoresizing.FlexibleHeight;
+            _label.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth;
             _label.TextAlignment = UITextAlignment.Center;
             _label.LineBreakMode = UILineBreakMode.TailTruncation;
             _label.TextColor = UIColor.White;

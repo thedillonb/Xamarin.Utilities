@@ -25,9 +25,9 @@ namespace Xamarin.Utilities.ViewControllers
             }
             set
             {
+                if (HeaderView != null) HeaderView.Text = value;
+                if (SlideUpTitle != null) SlideUpTitle.Text = value;
                 base.Title = value;
-                if (HeaderView != null) HeaderView.Text = base.Title;
-                if (SlideUpTitle != null) SlideUpTitle.Text = base.Title;
             }
         }
 
@@ -62,7 +62,7 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewDidLoad();
 
-            NavigationItem.TitleView = SlideUpTitle = new SlideUpTitleView(NavigationController.NavigationBar.Bounds.Height) { Text = base.Title };
+            NavigationItem.TitleView = SlideUpTitle = new SlideUpTitleView(NavigationController.NavigationBar.Bounds.Height) { Text = Title };
             SlideUpTitle.Offset = 100f;
 
             TableView.SectionHeaderHeight = 0;
