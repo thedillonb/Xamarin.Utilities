@@ -208,10 +208,14 @@ namespace Xamarin.Utilities.DialogElements
         {
             if (e == null)
                 return;
-            for (int i = _elements.Count; i > 0;){
+
+            for (int i = _elements.Count; i > 0;)
+            {
                 i--;
-                if (_elements [i] == e){
+                if (_elements [i] == e)
+                {
                     RemoveRange (i, 1, animation);
+                    e.Section = null;
                     return;
                 }
             }
@@ -246,14 +250,16 @@ namespace Xamarin.Utilities.DialogElements
 
             _elements.RemoveRange (start, count);
 
-            if (Root == null || Root.TableView == null)
-                return;
+            if (Root != null && Root.TableView != null)
+            {
+//                int sidx = Root.IndexOf(this);
+//                var paths = new NSIndexPath [count];
+//                for (int i = 0; i < count; i++)
+//                    paths[i] = NSIndexPath.FromRowSection(start + i, sidx);
+//                Root.TableView.DeleteRows(paths, anim);
 
-            int sidx = Root.IndexOf (this);
-            var paths = new NSIndexPath [count];
-            for (int i = 0; i < count; i++)
-                paths [i] = NSIndexPath.FromRowSection (start+i, sidx);
-            Root.TableView.DeleteRows (paths, anim);
+                Root.TableView.ReloadData();
+            }
         }
 
         public int Count 

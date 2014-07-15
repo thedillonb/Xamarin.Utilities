@@ -3,6 +3,7 @@ using Xamarin.Utilities.Views;
 using Xamarin.Utilities.Core.ViewModels;
 using MonoTouch.UIKit;
 using System.Reactive.Linq;
+using ReactiveUI;
 
 namespace Xamarin.Utilities.ViewControllers
 {
@@ -78,13 +79,20 @@ namespace Xamarin.Utilities.ViewControllers
                 Text = base.Title
             };
 
-            var topBackgroundView = this.CreateTopBackground(HeaderView.BackgroundColor);
-            var loadableViewModel = ViewModel as ILoadableViewModel;
-            if (loadableViewModel != null)
-            {
-                topBackgroundView.Hidden = true;
-                loadableViewModel.LoadCommand.IsExecuting.Where(x => !x).Skip(1).Take(1).Subscribe(_ => topBackgroundView.Hidden = false);
-            }
+            this.CreateTopBackground(HeaderView.BackgroundColor);
+
+//            this.WhenAnyValue(x => x.ViewModel)
+//                .Subscribe(x =>
+//                {
+//
+//                });
+//
+//            var loadableViewModel = ViewModel as ILoadableViewModel;
+//            if (loadableViewModel != null)
+//            {
+//                topBackgroundView.Hidden = true;
+//                loadableViewModel.LoadCommand.IsExecuting.Where(x => !x).Skip(1).Take(1).Subscribe(_ => topBackgroundView.Hidden = false);
+//            }
         }
     }
 }

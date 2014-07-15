@@ -16,6 +16,8 @@ namespace Xamarin.Utilities.DialogElements
 
         public Action<string> UrlRequested;
 
+        public Action LoadFinished;
+
         public float Height
         {
             get { return _height; }
@@ -67,6 +69,11 @@ namespace Xamarin.Utilities.DialogElements
             WebView.ScrollView.ScrollEnabled = false;
             WebView.ScrollView.Bounces = false;
             WebView.ShouldStartLoad = (w, r, n) => ShouldStartLoad(r, n);
+            WebView.LoadFinished += (sender, e) => 
+            {
+                if (LoadFinished != null && _hasValue)
+                    LoadFinished();
+            };
 
             HeightChanged = (x) => {
                 if (Section != null || Section.Root != null)
