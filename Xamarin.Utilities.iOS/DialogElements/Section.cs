@@ -292,7 +292,8 @@ namespace Xamarin.Utilities.DialogElements
         public void Reset(IEnumerable<Element> elements, UITableViewRowAnimation animation = UITableViewRowAnimation.Fade)
         {
             _elements.Clear();
-            Insert(0, animation, elements);
+            _elements.AddRange(elements);
+            Root.TableView.ReloadData();
         }
     }
 }

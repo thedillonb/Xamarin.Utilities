@@ -5,7 +5,7 @@ namespace ReactiveUI
 {
     public static class ReactiveListExtensions
     {
-        public static void Reset<T>(this ReactiveList<T> @this, IEnumerable<T> items)
+        public static void Reset<T>(this IReactiveList<T> @this, IEnumerable<T> items)
         {
             using (@this.SuppressChangeNotifications())
             {
