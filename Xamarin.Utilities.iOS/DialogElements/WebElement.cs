@@ -35,7 +35,7 @@ namespace Xamarin.Utilities.DialogElements
                 else
                 {
                     _hasValue = true;
-                    WebView.LoadRequest(new NSUrlRequest(new NSUrl(value)));
+                    WebView.LoadRequest(new NSUrlRequest(NSUrl.FromFilename(value)));
                 }
             }
         }
