@@ -8,11 +8,32 @@ namespace Xamarin.Utilities.DialogElements
     public class RootElement : IEnumerable<Section> 
     {
         private readonly List<Section> _sections = new List<Section>();
+        private readonly IDictionary<string, object> _offscreenCells = new Dictionary<string, object>();
         private readonly UITableView _tableView;
 
         public UITableView TableView
         {
             get { return _tableView; }
+        }
+
+        public IDictionary<string, object> OffscreenCells
+        {
+            get { return _offscreenCells; }
+        }
+
+        public TCell GetOffscreenCell<TCell>(string key, Func<TCell> create) where TCell : class
+        {
+            TCell cell = default(TCell);
+            if (_offscreenCells.ContainsKey(key))
+                cell = _offscreenCells[key] as TCell;
+
+            if (cell == default(TCell))
+            {
+                cell = create();
+                _offscreenCells[key] = cell;
+            }
+
+            return cell;
         }
 
         internal RootElement(UITableView tableView)

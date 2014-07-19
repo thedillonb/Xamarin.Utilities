@@ -5,9 +5,9 @@ using System.Drawing;
 
 namespace Xamarin.Utilities.DialogElements
 {
-    public class WebElement : Element, IElementSizing
+    public class WebElement : Element, IElementSizing, IDisposable
     {
-        protected readonly UIWebView WebView = null;
+        protected UIWebView WebView;
         private float _height;
         private bool _hasValue;
         protected readonly NSString Key;
@@ -23,12 +23,20 @@ namespace Xamarin.Utilities.DialogElements
             get { return _height; }
         }
 
-        public string Value
+        public string ContentPath
         {
             set
             {
-                _hasValue = !string.IsNullOrEmpty(value);
-                WebView.LoadHtmlString(value ?? string.Empty, NSBundle.MainBundle.BundleUrl);
+                if (value == null)
+                {
+                    _hasValue = false;
+                    WebView.LoadHtmlString(string.Empty, NSBundle.MainBundle.BundleUrl);
+                }
+                else
+                {
+                    _hasValue = true;
+                    WebView.LoadRequest(new NSUrlRequest(new NSUrl(value)));
+                }
             }
         }
 
@@ -60,6 +68,13 @@ namespace Xamarin.Utilities.DialogElements
             }
 
             return true;
+        }
+
+        public void Dispose()
+        {
+            WebView.RemoveFromSuperview();
+            WebView.Dispose();
+            WebView = null;
         }
 
         public WebElement (string cellKey) 

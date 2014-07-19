@@ -89,6 +89,7 @@
     <Compile Include="Views\ImageAndTitleHeaderView.cs" />
     <Compile Include="ViewControllers\ViewModelPrettyDialogViewController.cs" />
     <Compile Include="Views\SlideupTitleView.cs" />
+    <Compile Include="Purchases\InAppPurchases.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
@@ -140,4 +141,7 @@
     <BundleResource Include="Xamarin.Utilities.bundle\back.png" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Purchases\" />
+  </ItemGroup>
 </Project>

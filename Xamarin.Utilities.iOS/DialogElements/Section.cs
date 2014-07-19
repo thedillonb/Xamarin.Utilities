@@ -284,6 +284,8 @@ namespace Xamarin.Utilities.DialogElements
 
         public void Clear ()
         {
+            foreach (var e in _elements)
+                e.Section = null;
             _elements.Clear();
             if (Root != null && Root.TableView != null)
                 Root.TableView.ReloadData ();
@@ -293,6 +295,8 @@ namespace Xamarin.Utilities.DialogElements
         {
             _elements.Clear();
             _elements.AddRange(elements);
+            foreach (var e in _elements)
+                e.Section = this;
             Root.TableView.ReloadData();
         }
     }
