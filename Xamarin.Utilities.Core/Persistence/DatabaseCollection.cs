@@ -1,18 +1,20 @@
 using System;
+using SQLite;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Xamarin.Utilities.Core.Persistence
 {
     public class DatabaseCollection<TObject, TKey> : IEnumerable<TObject> where TObject : IDatabaseItem<TKey>, new()
     {
-        protected SQLite.SQLiteConnection SqlConnection { get; private set; }
+        protected SQLiteConnection SqlConnection { get; private set; }
 
         public TObject this[TKey id]
         {
             get
             {
-                Func<TObject, bool> del = x => x.Id.Equals(id);
-                return SqlConnection.Find<TObject>(del);
+                return SqlConnection.Find<TObject>(x => x.Id.Equals(id));
             }
         }
 
@@ -37,15 +39,29 @@ namespace Xamarin.Utilities.Core.Persistence
             SqlConnection.Delete(o);
         }
 
-        public IEnumerator<TObject> GetEnumerator()
+        public int Count()
         {
-            return SqlConnection.Table<TObject>().GetEnumerator();
+            return Query.Count();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        public int Count (Expression<Func<TObject, bool>> predExpr)
+        {
+            return Query.Count(predExpr);
+        }
+
+        public TableQuery<TObject> Query
+        {
+            get { return SqlConnection.Table<TObject>(); }
+        }
+
+        public IEnumerator<TObject> GetEnumerator()
+        {
+            return Query.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
     }
-
 }

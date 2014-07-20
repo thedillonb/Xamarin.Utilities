@@ -12,9 +12,7 @@ namespace Xamarin.Utilities.Purchases
         private static readonly Lazy<InAppPurchases> _instance = new Lazy<InAppPurchases>(() => new InAppPurchases());
         private readonly TransactionObserver _observer;
         private readonly Dictionary<string, TaskCompletionSource<bool>> _completions = new Dictionary<string, TaskCompletionSource<bool>>();
-
-        public event Action<SKPayment> PurchaseSuccess;
-        public event Action<SKPayment, Exception> PurchaseError;
+        private readonly LinkedList<object> _productDataRequests = new LinkedList<object>();
 
         public static InAppPurchases Instance
         {
@@ -28,10 +26,6 @@ namespace Xamarin.Utilities.Purchases
                 _completions[id.ProductIdentifier].SetException(e);
                 _completions.Remove(id.ProductIdentifier);
             }
-
-            var handle = PurchaseError;
-            if (handle != null)
-                handle(id, e);
         }
 
         private void OnPurchaseSuccess(SKPayment id)
@@ -41,10 +35,6 @@ namespace Xamarin.Utilities.Purchases
                 _completions[id.ProductIdentifier].SetResult(true);
                 _completions.Remove(id.ProductIdentifier);
             }
-
-            var handle = PurchaseSuccess;
-            if (handle != null)
-                handle(id);
         }
 
         private InAppPurchases()
@@ -53,21 +43,31 @@ namespace Xamarin.Utilities.Purchases
             SKPaymentQueue.DefaultQueue.AddTransactionObserver(_observer);
         }
 
-        public static async Task<SKProductsResponse> RequestProductData (params string[] productIds)
+        public async Task<SKProductsResponse> RequestProductData (params string[] productIds)
         {
             var array = new NSString[productIds.Length];
             for (var i = 0; i < productIds.Length; i++)
                 array[i] = new NSString(productIds[i]);
 
             var tcs = new TaskCompletionSource<SKProductsResponse>();
-            var productIdentifiers = NSSet.MakeNSObjectSet<NSString>(array); //NSSet.MakeNSObjectSet<NSString>(array);​​​
-            var productsRequest = new SKProductsRequest(productIdentifiers);
-            productsRequest.ReceivedResponse += (sender, e) => tcs.SetResult(e.Response);
-            productsRequest.RequestFailed += (sender, e) => tcs.SetException(new Exception(e.Error.LocalizedDescription));
-            productsRequest.Start();
-            var ret = await tcs.Task;
-            productsRequest.Dispose();
-            return ret;
+            _productDataRequests.AddLast(tcs);
+
+            try
+            {
+                var productIdentifiers = NSSet.MakeNSObjectSet<NSString>(array); //NSSet.MakeNSObjectSet<NSString>(array);​​​
+                var productsRequest = new SKProductsRequest(productIdentifiers);
+                productsRequest.ReceivedResponse += (sender, e) => tcs.SetResult(e.Response);
+                productsRequest.RequestFailed += (sender, e) => tcs.SetException(new Exception(e.Error.LocalizedDescription));
+                productsRequest.Start();
+                var ret = await tcs.Task;
+                productsRequest.Dispose();
+                return ret;
+            }
+            finally
+            {
+                _productDataRequests.Remove(tcs);
+                Console.WriteLine("Remaining: " + _productDataRequests.Count);
+            }
         }
 
         public static bool CanMakePayments()
