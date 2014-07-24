@@ -19,7 +19,7 @@ namespace Xamarin.Utilities.DialogElements
         UILabel _caption;
 		
 		public LoadMoreElement () 
-            : base (UITableViewCellStyle.Default)
+            : base (UITableViewCellStyle.Default, "LoadMoreElement")
 		{
 		}
 		
@@ -29,7 +29,7 @@ namespace Xamarin.Utilities.DialogElements
 		}
 		
 		public LoadMoreElement (string normalCaption, string loadingCaption, Action<LoadMoreElement> tapped, UIFont font, UIColor textColor) 
-            : base (UITableViewCellStyle.Default)
+            : base (UITableViewCellStyle.Default, "LoadMoreElement")
 		{
 			NormalCaption = normalCaption;
 			LoadingCaption = loadingCaption;

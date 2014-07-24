@@ -6,15 +6,18 @@ using MonoTouch.Foundation;
 namespace Xamarin.Utilities.DialogElements
 {
 	public abstract class OwnerDrawnElement : Element, IElementSizing
-	{		
+	{	
+        private string _key;
+
 		public UITableViewCellStyle Style
 		{
 			get;set;	
 		}
 		
-		protected OwnerDrawnElement (UITableViewCellStyle style)
+        protected OwnerDrawnElement (UITableViewCellStyle style, string key)
 		{
 			this.Style = style;
+            _key = key;
 		}
 		
 		public float GetHeight (UITableView tableView, NSIndexPath indexPath)
@@ -24,10 +27,10 @@ namespace Xamarin.Utilities.DialogElements
 		
 		public override UITableViewCell GetCell (UITableView tv)
 		{
-            var cell = tv.DequeueReusableCell(CellKey) as OwnerDrawnCell;
+            var cell = tv.DequeueReusableCell(_key) as OwnerDrawnCell;
 			if (cell == null)
 			{
-                cell = new OwnerDrawnCell(this, this.Style, CellKey);
+                cell = new OwnerDrawnCell(this, this.Style, _key);
                 cell.AutosizesSubviews = true;
                 cell.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
                 CellCreated(cell, cell.view);

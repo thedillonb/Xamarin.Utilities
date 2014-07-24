@@ -7,18 +7,11 @@ namespace Xamarin.Utilities.DialogElements
     public abstract class Element 
     {
         internal Section Section;
-        private readonly string _cellType;
-
-        protected virtual NSString CellKey
-        {
-            get { return new NSString(_cellType); }
-        }
 
         public string Caption { get; set; }
 
         protected Element()
         {
-            _cellType = GetType().Name;
         }
 
         public abstract UITableViewCell GetCell(UITableView tv);

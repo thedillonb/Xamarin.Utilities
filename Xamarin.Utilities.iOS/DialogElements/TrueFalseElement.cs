@@ -56,9 +56,9 @@ namespace Xamarin.Utilities.DialogElements
                 _switch.On = Value;
             }
 
-            var cell = tv.DequeueReusableCell (CellKey);
+            var cell = tv.DequeueReusableCell ("boolean_element");
             if (cell == null){
-                cell = new UITableViewCell (UITableViewCellStyle.Default, CellKey);
+                cell = new UITableViewCell (UITableViewCellStyle.Default, "boolean_element");
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
             }
 

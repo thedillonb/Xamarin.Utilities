@@ -8,6 +8,7 @@ namespace Xamarin.Utilities.DialogElements
 {
     public class StringElement : Element 
     {
+        private static NSString Key = new NSString("StringElement");
         public UITextAlignment Alignment = UITextAlignment.Left;
         public string Value;
         public event Action Tapped;
@@ -29,10 +30,10 @@ namespace Xamarin.Utilities.DialogElements
 
         public override UITableViewCell GetCell (UITableView tv)
         {
-            var cell = tv.DequeueReusableCell (CellKey);
+            var cell = tv.DequeueReusableCell (Key);
             if (cell == null)
             {
-                cell = new UITableViewCell (Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1, CellKey);
+                cell = new UITableViewCell (Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1, Key);
                 cell.SelectionStyle = (Tapped != null) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
             }
             cell.Accessory = UITableViewCellAccessory.None;

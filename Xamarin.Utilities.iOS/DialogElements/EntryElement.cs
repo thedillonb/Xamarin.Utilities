@@ -188,18 +188,12 @@ namespace Xamarin.Utilities.DialogElements
 		}
 		
 		static NSString cellkey = new NSString ("EntryElement");
-		
-		protected override NSString CellKey {
-			get {
-				return cellkey;
-			}
-		}
 
 		UITableViewCell cell;
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			if (cell == null) {
-				cell = new UITableViewCell (UITableViewCellStyle.Default, CellKey);
+                cell = new UITableViewCell (UITableViewCellStyle.Default, cellkey);
 				cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 
 			} 

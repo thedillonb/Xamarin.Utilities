@@ -96,11 +96,6 @@ namespace Xamarin.Utilities.DialogElements
             };
         }
 
-        protected override NSString CellKey
-        {
-            get { return Key; }
-        }
-
         public float GetHeight (UITableView tableView, NSIndexPath indexPath)
         {
             return _hasValue ? _height : 0f;
@@ -108,9 +103,9 @@ namespace Xamarin.Utilities.DialogElements
 
         public override UITableViewCell GetCell (UITableView tv)
         {
-            var cell = tv.DequeueReusableCell (CellKey);
+            var cell = tv.DequeueReusableCell (Key);
             if (cell == null){
-                cell = new UITableViewCell (UITableViewCellStyle.Default, CellKey);
+                cell = new UITableViewCell (UITableViewCellStyle.Default, Key);
                 cell.SelectionStyle = UITableViewCellSelectionStyle.None;
             }  
 

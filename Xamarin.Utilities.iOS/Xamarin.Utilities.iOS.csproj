@@ -90,6 +90,7 @@
     <Compile Include="ViewControllers\ViewModelPrettyDialogViewController.cs" />
     <Compile Include="Views\SlideupTitleView.cs" />
     <Compile Include="Purchases\InAppPurchases.cs" />
+    <Compile Include="Extensions\UIApplicationDelegateExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">

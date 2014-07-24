@@ -22,7 +22,7 @@ namespace Xamarin.Utilities.DialogElements
 
         public override UITableViewCell GetCell(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey) as CustomInputCell;
+            var cell = tv.DequeueReusableCell(CustomInputCell.Key) as CustomInputCell;
             if (cell == null)
             {
                 cell = new CustomInputCell();
@@ -56,11 +56,12 @@ namespace Xamarin.Utilities.DialogElements
 
         private class CustomInputCell : UITableViewCell
         {
+            public static NSString Key = new NSString("CustomInputCell");
             public static UIFont InputFont = UIFont.SystemFontOfSize(14f);
             public readonly UITextView TextView;
 
             public CustomInputCell()
-                : base(new RectangleF(0, 0, 320, 100f))
+                : base(UITableViewCellStyle.Default, Key)
             {
                 TextView = new UITextView(new RectangleF(0, 0, ContentView.Frame.Width, ContentView.Frame.Height));
                 TextView.ScrollEnabled = false;

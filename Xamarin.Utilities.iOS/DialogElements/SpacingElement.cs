@@ -5,6 +5,7 @@ namespace Xamarin.Utilities.DialogElements
 {
     public class SpacingElement : Element, IElementSizing
     {
+        private static NSString Key = new NSString("SpacingElement");
         private readonly float _height;
 
         public SpacingElement(float height) 
@@ -14,7 +15,7 @@ namespace Xamarin.Utilities.DialogElements
 
         public override UITableViewCell GetCell(UITableView tv)
         {
-            var cell = tv.DequeueReusableCell(CellKey) ?? new UITableViewCell(UITableViewCellStyle.Default, CellKey);
+            var cell = tv.DequeueReusableCell(Key) ?? new UITableViewCell(UITableViewCellStyle.Default, Key);
             cell.SelectionStyle = UITableViewCellSelectionStyle.None;
             cell.SeparatorInset = UIEdgeInsets.Zero;
             cell.BackgroundColor = UIColor.Clear;

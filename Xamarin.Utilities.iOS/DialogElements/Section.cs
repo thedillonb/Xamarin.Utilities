@@ -2,7 +2,6 @@
 using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.Foundation;
-using ReactiveUI.Cocoa;
 
 namespace Xamarin.Utilities.DialogElements
 {
@@ -10,7 +9,11 @@ namespace Xamarin.Utilities.DialogElements
         object header, footer;
         private readonly List<Element> _elements = new List<Element> ();
 
-        internal RootElement Root;
+        public RootElement Root
+        {
+            get;
+            internal set;
+        }
 
         // X corresponds to the alignment, Y to the height of the password
         public SizeF EntryAlignment;
