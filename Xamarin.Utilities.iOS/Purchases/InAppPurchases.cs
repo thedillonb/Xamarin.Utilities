@@ -11,7 +11,7 @@ namespace Xamarin.Utilities.Purchases
     {
         private static readonly Lazy<InAppPurchases> _instance = new Lazy<InAppPurchases>(() => new InAppPurchases());
         private readonly TransactionObserver _observer;
-        private readonly Dictionary<string, TaskCompletionSource<bool>> _completions = new Dictionary<string, TaskCompletionSource<bool>>();
+        private TaskCompletionSource<bool> _actionSource;
         private readonly LinkedList<object> _productDataRequests = new LinkedList<object>();
 
         public static InAppPurchases Instance
@@ -21,20 +21,14 @@ namespace Xamarin.Utilities.Purchases
 
         private void OnPurchaseError(SKPayment id, Exception e)
         {
-            if (id != null && _completions.ContainsKey(id.ProductIdentifier))
-            {
-                _completions[id.ProductIdentifier].SetException(e);
-                _completions.Remove(id.ProductIdentifier);
-            }
+            if (_actionSource != null)
+                _actionSource.TrySetException(e);
         }
 
         private void OnPurchaseSuccess(SKPayment id)
         {
-            if (id != null && _completions.ContainsKey(id.ProductIdentifier))
-            {
-                _completions[id.ProductIdentifier].SetResult(true);
-                _completions.Remove(id.ProductIdentifier);
-            }
+            if (_actionSource != null)
+                _actionSource.TrySetResult(true);
         }
 
         private InAppPurchases()
@@ -75,18 +69,19 @@ namespace Xamarin.Utilities.Purchases
             return SKPaymentQueue.CanMakePayments;        
         }
 
-        public void Restore()
+        public Task Restore()
         {
-            SKPaymentQueue.DefaultQueue.RestoreCompletedTransactions();                        
+            _actionSource = new TaskCompletionSource<bool>();
+            SKPaymentQueue.DefaultQueue.RestoreCompletedTransactions();
+            return _actionSource.Task;
         }
 
         public async Task PurchaseProduct(SKProduct productId)
         {
-            var completionSource = new TaskCompletionSource<bool>();
+            _actionSource = new TaskCompletionSource<bool>();
             SKPayment payment = SKPayment.PaymentWithProduct(productId);
-            _completions.Add(payment.ProductIdentifier, completionSource);
             SKPaymentQueue.DefaultQueue.AddPayment (payment);
-            await completionSource.Task;
+            await _actionSource.Task;
         }
 
         private void CompleteTransaction (SKPaymentTransaction transaction)
@@ -160,11 +155,15 @@ namespace Xamarin.Utilities.Purchases
             public override void PaymentQueueRestoreCompletedTransactionsFinished (SKPaymentQueue queue)
             {
                 Console.WriteLine(" ** RESTORE PaymentQueueRestoreCompletedTransactionsFinished ");
+                if (_inAppPurchases._actionSource != null)
+                    _inAppPurchases._actionSource.TrySetResult(true);
             }
 
             public override void RestoreCompletedTransactionsFailedWithError (SKPaymentQueue queue, NSError error)
             {
                 Console.WriteLine(" ** RESTORE RestoreCompletedTransactionsFailedWithError " + error.LocalizedDescription);
+                if (_inAppPurchases._actionSource != null)
+                    _inAppPurchases._actionSource.TrySetResult(true);
             }
         }
     }

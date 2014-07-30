@@ -31,6 +31,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using System.Security.Cryptography;
 using Xamarin.Utilities.Core.Utilities;
+using System.Diagnostics;
 
 namespace Xamarin.Utilities.Images
 {
@@ -196,35 +197,43 @@ namespace Xamarin.Utilities.Images
         /// </returns>
         public UIImage RequestImage (Uri uri, IImageUpdated notify)
         {
-            UIImage ret;
+            try
+            {
+                UIImage ret;
 
-            lock (cache){
-                ret = cache [uri];
-                if (ret != null)
-                    return ret;
-            }
-
-            lock (requestQueue){
-                if (pendingRequests.ContainsKey (uri)) {
-                    if (!pendingRequests [uri].Contains(notify))
-                        pendingRequests [uri].Add (notify);
-                    return null;
-                }               
-            }
-
-            string picfile = uri.IsFile ? uri.LocalPath : PicDir + md5 (uri.AbsoluteUri);
-            if (File.Exists (picfile)){
-                ret = UIImage.FromFile (picfile);
-                if (ret != null){
-                    lock (cache)
-                        cache [uri] = ret;
-                    return ret;
+                lock (cache){
+                    ret = cache [uri];
+                    if (ret != null)
+                        return ret;
                 }
-            } 
-            if (uri.IsFile)
+
+                lock (requestQueue){
+                    if (pendingRequests.ContainsKey (uri)) {
+                        if (!pendingRequests [uri].Contains(notify))
+                            pendingRequests [uri].Add (notify);
+                        return null;
+                    }               
+                }
+
+                string picfile = uri.IsFile ? uri.LocalPath : PicDir + md5 (uri.AbsoluteUri);
+                if (File.Exists (picfile)){
+                    ret = UIImage.FromFile (picfile);
+                    if (ret != null){
+                        lock (cache)
+                            cache [uri] = ret;
+                        return ret;
+                    }
+                } 
+                if (uri.IsFile)
+                    return null;
+                QueueRequest (uri, notify);
                 return null;
-            QueueRequest (uri, notify);
-            return null;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Unable to request image: " + e.Message);
+                return null;
+            }
         }
 
         static void QueueRequest (Uri uri, IImageUpdated notify)
