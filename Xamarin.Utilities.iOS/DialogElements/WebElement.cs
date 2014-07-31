@@ -40,6 +40,23 @@ namespace Xamarin.Utilities.DialogElements
             }
         }
 
+        public string Value
+        {
+            set
+            {
+                if (value == null)
+                {
+                    _hasValue = false;
+                    WebView.LoadHtmlString(string.Empty, NSBundle.MainBundle.BundleUrl);
+                }
+                else
+                {
+                    _hasValue = true;
+                    WebView.LoadHtmlString(value, NSBundle.MainBundle.BundleUrl);
+                }
+            }
+        }
+
         private bool ShouldStartLoad (NSUrlRequest request, UIWebViewNavigationType navigationType)
         {
             if (request.Url.AbsoluteString.StartsWith("app://resize"))

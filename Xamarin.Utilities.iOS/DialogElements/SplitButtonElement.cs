@@ -2,6 +2,7 @@ using MonoTouch.UIKit;
 using System.Drawing;
 using System;
 using System.Collections.Generic;
+using ReactiveUI;
 
 namespace Xamarin.Utilities.DialogElements
 {

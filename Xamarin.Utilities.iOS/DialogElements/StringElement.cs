@@ -63,7 +63,7 @@ namespace Xamarin.Utilities.DialogElements
     ///   options and can render images or background images either from UIImage parameters 
     ///   or by downloading them from the net.
     /// </summary>
-    public class StyledStringElement : StringElement, IImageUpdated, IColorizeBackground 
+    public class StyledStringElement : StringElement, IImageUpdated 
     {
         public static UIFont  DefaultTitleFont = UIFont.SystemFontOfSize(16f);
         public static UIFont  DefaultDetailFont = UIFont.SystemFontOfSize(13f);
@@ -216,6 +216,24 @@ namespace Xamarin.Utilities.DialogElements
                 cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
             }
             PrepareCell (cell);
+
+            ClearBackground(cell);
+
+            if (extraInfo != null)
+            {
+                if (extraInfo.BackgroundColor != null)
+                {
+                    cell.BackgroundColor = extraInfo.BackgroundColor;
+                    cell.TextLabel.BackgroundColor = UIColor.Clear;
+                }
+                else if (extraInfo.BackgroundUri != null)
+                {
+                    var img = ImageLoader.DefaultRequestImage(extraInfo.BackgroundUri, this);
+                    cell.BackgroundColor = img == null ? UIColor.White : UIColor.FromPatternImage(img);
+                    cell.TextLabel.BackgroundColor = UIColor.Clear;
+                }
+            }
+
             return cell;
         }
 
@@ -269,24 +287,6 @@ namespace Xamarin.Utilities.DialogElements
 
             if (cell.DetailTextLabel != null)
                 cell.DetailTextLabel.BackgroundColor = UIColor.Clear;
-        }
-
-        void IColorizeBackground.WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
-        {
-            ClearBackground (cell);
-
-            if (extraInfo == null)
-                return;
-
-
-            if (extraInfo.BackgroundColor != null){
-                cell.BackgroundColor = extraInfo.BackgroundColor;
-                cell.TextLabel.BackgroundColor = UIColor.Clear;
-            } else if (extraInfo.BackgroundUri != null){
-                var img = ImageLoader.DefaultRequestImage (extraInfo.BackgroundUri, this);
-                cell.BackgroundColor = img == null ? UIColor.White : UIColor.FromPatternImage (img);
-                cell.TextLabel.BackgroundColor = UIColor.Clear;
-            } 
         }
 
         void IImageUpdated.UpdatedImage (Uri uri)

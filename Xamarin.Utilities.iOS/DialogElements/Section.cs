@@ -101,19 +101,9 @@ namespace Xamarin.Utilities.DialogElements
                 InsertVisual (_elements.Count-1, UITableViewRowAnimation.None, 1);
         }
 
-        public void Add<T>(T element) where T : Element
-        {
-            Add((Element)element);
-        }
-
         public void Add(IEnumerable<Element> elements)
         {
             AddAll(elements);
-        }
-
-        public void Add<T>(IEnumerable<T> elements) where T : Element
-        {
-            AddAll((IEnumerable<Element>)elements);
         }
 
         /// <summary>
@@ -123,7 +113,7 @@ namespace Xamarin.Utilities.DialogElements
         /// An enumerable list that can be produced by something like:
         ///    from x in ... select (Element) new MyElement (...)
         /// </param>
-        public int AddAll (IEnumerable<Element> elements)
+        public int AddAll(IEnumerable<Element> elements)
         {
             int count = 0;
             foreach (var e in elements){

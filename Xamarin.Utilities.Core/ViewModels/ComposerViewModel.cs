@@ -12,7 +12,7 @@ namespace Xamarin.Utilities.Core.ViewModels
             set { this.RaiseAndSetIfChanged(ref _text, value); }
         }
 
-        public IReactiveCommand SaveCommand { get; private set; }
+        public IReactiveCommand<object> SaveCommand { get; private set; }
 
         public ComposerViewModel()
         {
