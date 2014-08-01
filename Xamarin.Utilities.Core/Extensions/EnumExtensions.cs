@@ -1,4 +1,7 @@
-﻿namespace System
+﻿using System.Linq;
+using System.Reflection;
+
+namespace System
 {
     public class EnumDescription : Attribute
     {
@@ -14,9 +17,9 @@
         public static string Description(this Enum value)
         {
             var enumType = value.GetType();
-            var field = enumType.GetField(value.ToString());
-            var attributes = field.GetCustomAttributes(typeof(EnumDescription), false);
-            return attributes.Length == 0 ? value.ToString() : ((EnumDescription)attributes[0]).Value;
+            var field = enumType.GetRuntimeField(value.ToString());
+            var attributes = field.GetCustomAttributes(typeof (EnumDescription), false).ToList();
+            return attributes.Count == 0 ? value.ToString() : ((EnumDescription)attributes[0]).Value;
         }
     }
 }

@@ -1,62 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Choose>
-    <When Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">
-      <PropertyGroup>
-        <NuGetRepositoryPath>..\</NuGetRepositoryPath>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(SolutionDir) != '' And $(SolutionDir) != '*Undefined*'">
-      <PropertyGroup>
-        <NuGetRepositoryPath>$(SolutionDir)</NuGetRepositoryPath>
-      </PropertyGroup>
-    </When>
-  </Choose>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EBBA1BD0-8430-4CC1-B636-B89C505C7D1C}</ProjectGuid>
-    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xamarin.Utilities.Core</RootNamespace>
-    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xamarin.Utilities.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\iPhone\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Extensions\CommandExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\FireAndForget.cs" />
-    <Compile Include="Extensions\CommandExtensions.cs" />
+    <Compile Include="Extensions\ReactiveExtensions.cs" />
     <Compile Include="Extensions\ReactiveListExtensions.cs" />
-    <Compile Include="IoC\IoC.cs" />
-    <Compile Include="IoC\TinyIoC.cs" />
     <Compile Include="Persistence\DatabaseCollection.cs" />
     <Compile Include="Persistence\DatabaseItem.cs" />
     <Compile Include="Persistence\SQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveAddons\ReactiveCollection.cs" />
-    <Compile Include="Services\ErrorService.cs" />
+    <Compile Include="Services\AnalyticsService.cs" />
     <Compile Include="Services\IAlertDialogService.cs" />
     <Compile Include="Services\IAnalyticsService.cs" />
     <Compile Include="Services\IDefaultValueService.cs" />
@@ -69,28 +57,30 @@
     <Compile Include="Services\INetworkActivityService.cs" />
     <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\IStatusIndicatorService.cs" />
+    <Compile Include="Services\ITransitionOrchestrationService.cs" />
+    <Compile Include="Services\IViewModelViewService.cs" />
     <Compile Include="Services\JsonHttpClientService.cs" />
     <Compile Include="Services\JsonSerializationService.cs" />
+    <Compile Include="Utilities\IoC.cs" />
+    <Compile Include="Utilities\LRUCache.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ComposerViewModel.cs" />
-    <Compile Include="Persistence\Database.cs" />
-    <Compile Include="Services\IViewModelViewService.cs" />
-    <Compile Include="Services\ITransitionOrchestrationService.cs" />
-    <Compile Include="ViewModels\WebBrowserViewModel.cs" />
     <Compile Include="ViewModels\IBaseViewModel.cs" />
-    <Compile Include="Services\AnalyticsService.cs" />
-    <Compile Include="Extensions\ReactiveExtensions.cs" />
-    <Compile Include="Utilities\LRUCache.cs" />
     <Compile Include="ViewModels\ILoadableViewModel.cs" />
-    <Compile Include="Services\ViewModelViewService.cs" />
+    <Compile Include="ViewModels\WebBrowserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="monotouch" />
-    <Reference Include="System" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Core" />
+    <Reference Include="Autofac">
+      <HintPath>..\lib\Common\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Common\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveUI">
+      <HintPath>..\lib\Common\ReactiveUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\lib\Common\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Core">
       <HintPath>..\lib\Common\System.Reactive.Core.dll</HintPath>
@@ -101,16 +91,13 @@
     <Reference Include="System.Reactive.Linq">
       <HintPath>..\lib\Common\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\lib\Common\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveUI">
-      <HintPath>..\lib\iOS\ReactiveUI.dll</HintPath>
-    </Reference>
-    <Reference Include="Splat">
-      <HintPath>..\lib\iOS\Splat.dll</HintPath>
-    </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
-  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

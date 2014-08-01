@@ -2,8 +2,6 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using Xamarin.Utilities.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace Xamarin.Utilities.Core.ViewModels
 {
@@ -32,21 +30,9 @@ namespace Xamarin.Utilities.Core.ViewModels
             });
         }
 
-        public IBaseViewModel CreateViewModel(Type type)
-        {
-            return IoC.Resolve(type) as IBaseViewModel;
-        }
-
         public TViewModel CreateViewModel<TViewModel>() where TViewModel : class
         {
             return GetService<TViewModel>();
-        }
-
-
-        public TViewModel CreateViewModel<TViewModel>(object navObject) where TViewModel : class
-        {
-            var d = new Dictionary<string, object> {{"navObject", navObject}};
-            return IoC.Resolve<TViewModel>(d);
         }
 
         public void ShowViewModel<TViewModel>(TViewModel viewModel) where TViewModel : class, IBaseViewModel
@@ -59,7 +45,7 @@ namespace Xamarin.Utilities.Core.ViewModels
 
         public void CreateAndShowViewModel<TViewModel>() where TViewModel : class, IBaseViewModel
         {
-            ShowViewModel<TViewModel>(CreateViewModel<TViewModel>());
+            ShowViewModel(CreateViewModel<TViewModel>());
         }
 
         /// <summary>

@@ -23,9 +23,7 @@
 #define USE_CSHARP_SQLITE
 #endif
 
-#if NETFX_CORE
 #define USE_NEW_REFLECTION_API
-#endif
 
 using System;
 using System.Diagnostics;
@@ -1016,7 +1014,8 @@ namespace SQLite
                         #elif SILVERLIGHT
                         _transactionDepth = depth;
                         #else
-                        Thread.VolatileWrite (ref _transactionDepth, depth);
+                        Volatile.Write(ref _transactionDepth, depth);
+                        //Thread.VolatileWrite (ref _transactionDepth, depth);
                         #endif
                         Execute (cmd + savepoint);
                         return;

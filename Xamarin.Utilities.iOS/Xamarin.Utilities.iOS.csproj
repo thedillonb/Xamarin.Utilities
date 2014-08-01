@@ -40,11 +40,13 @@
     <Compile Include="Services\AlertDialogService.cs" />
     <Compile Include="Services\DefaultValueService.cs" />
     <Compile Include="Services\EnvironmentalService.cs" />
+    <Compile Include="Services\ErrorService.cs" />
     <Compile Include="Services\HttpClientService.cs" />
     <Compile Include="Services\JavascriptService.cs" />
     <Compile Include="Services\NetworkActivityService.cs" />
     <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\StatusIndicatorService.cs" />
+    <Compile Include="Services\ViewModelViewService.cs" />
     <Compile Include="ViewControllers\ComposerViewController.cs" />
     <Compile Include="ViewControllers\LiteComposerViewController.cs" />
     <Compile Include="Views\PickerAlertView.cs" />
@@ -93,12 +95,6 @@
     <Compile Include="Extensions\UIApplicationDelegateExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
-      <Project>{EBBA1BD0-8430-4CC1-B636-B89C505C7D1C}</Project>
-      <Name>Xamarin.Utilities.Core.iOS</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="BTProgressHUD">
       <HintPath>..\lib\iOS\BTProgressHUD.dll</HintPath>
     </Reference>
@@ -141,8 +137,11 @@
     <BundleResource Include="Xamarin.Utilities.bundle\back%402x.png" />
     <BundleResource Include="Xamarin.Utilities.bundle\back.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Purchases\" />
+    <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.csproj">
+      <Project>{0ca8cc58-18fa-4f91-9e47-cae155ce3965}</Project>
+      <Name>Xamarin.Utilities.Core</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
