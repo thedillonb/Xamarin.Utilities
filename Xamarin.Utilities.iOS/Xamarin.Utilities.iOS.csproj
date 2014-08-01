@@ -41,6 +41,7 @@
     <Compile Include="Services\DefaultValueService.cs" />
     <Compile Include="Services\EnvironmentalService.cs" />
     <Compile Include="Services\ErrorService.cs" />
+    <Compile Include="Services\FilesystemService.cs" />
     <Compile Include="Services\HttpClientService.cs" />
     <Compile Include="Services\JavascriptService.cs" />
     <Compile Include="Services\NetworkActivityService.cs" />
