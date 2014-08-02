@@ -44,6 +44,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveAddons\ReactiveCollection.cs" />
     <Compile Include="Services\AnalyticsService.cs" />
+    <Compile Include="Services\ErrorService.cs" />
     <Compile Include="Services\IAlertDialogService.cs" />
     <Compile Include="Services\IAnalyticsService.cs" />
     <Compile Include="Services\IDefaultValueService.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Services\IViewModelViewService.cs" />
     <Compile Include="Services\JsonHttpClientService.cs" />
     <Compile Include="Services\JsonSerializationService.cs" />
+    <Compile Include="Services\ViewModelViewService.cs" />
     <Compile Include="Utilities\IoC.cs" />
     <Compile Include="Utilities\LRUCache.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -70,6 +72,9 @@
     <Compile Include="ViewModels\WebBrowserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Akavache">
+      <HintPath>..\lib\Common\Akavache.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\lib\Common\Autofac.dll</HintPath>
     </Reference>

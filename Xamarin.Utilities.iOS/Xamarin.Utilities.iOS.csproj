@@ -47,7 +47,6 @@
     <Compile Include="Services\NetworkActivityService.cs" />
     <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\StatusIndicatorService.cs" />
-    <Compile Include="Services\ViewModelViewService.cs" />
     <Compile Include="ViewControllers\ComposerViewController.cs" />
     <Compile Include="ViewControllers\LiteComposerViewController.cs" />
     <Compile Include="Views\PickerAlertView.cs" />

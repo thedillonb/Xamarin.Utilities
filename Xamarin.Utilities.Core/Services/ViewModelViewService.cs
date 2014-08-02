@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using ReactiveUI;
 using System.Collections.Generic;
 using System.Linq;
-using Xamarin.Utilities.Core.ViewModels;
 
 namespace Xamarin.Utilities.Core.Services
 {
@@ -12,17 +12,17 @@ namespace Xamarin.Utilities.Core.Services
 
         public void RegisterViewModels(System.Reflection.Assembly asm)
         {
-            foreach (var type in asm.GetTypes().Where(x => !x.IsAbstract && x.GetInterfaces().Any(y => y == typeof(IViewFor))))
+            foreach (var type in asm.DefinedTypes.Where(x => !x.IsAbstract && x.ImplementedInterfaces.Any(y => y == typeof(IViewFor))))
             {
-                var viewForType = type.GetInterfaces().FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IViewFor<>));
-                Register(viewForType.GetGenericArguments()[0], type);
+                var viewForType = type.ImplementedInterfaces.FirstOrDefault(x => x.IsConstructedGenericType && x.GetGenericTypeDefinition() == typeof(IViewFor<>));
+                Register(viewForType.GenericTypeArguments[0], type.AsType());
             }
         }
 
         public void Register(Type viewModelType, Type viewType)
         {
             #if DEBUG
-            Console.WriteLine("Registering ViewModel-To-View: {0} to {1}", viewModelType.Name, viewType.Name); 
+            Debug.WriteLine("Registering ViewModel-To-View: {0} to {1}", viewModelType.Name, viewType.Name); 
             #endif 
 
             _viewModelViewDictionary.Add(viewModelType, viewType);
