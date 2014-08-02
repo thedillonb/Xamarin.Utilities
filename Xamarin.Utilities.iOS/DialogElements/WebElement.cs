@@ -9,7 +9,6 @@ namespace Xamarin.Utilities.DialogElements
     {
         protected UIWebView WebView;
         private float _height;
-        private bool _hasValue;
         protected readonly NSString Key;
 
         public Action<float> HeightChanged;
@@ -23,18 +22,20 @@ namespace Xamarin.Utilities.DialogElements
             get { return _height; }
         }
 
+        public bool HasValue { get; private set; }
+
         public string ContentPath
         {
             set
             {
                 if (value == null)
                 {
-                    _hasValue = false;
+                    HasValue = false;
                     WebView.LoadHtmlString(string.Empty, NSBundle.MainBundle.BundleUrl);
                 }
                 else
                 {
-                    _hasValue = true;
+                    HasValue = true;
                     WebView.LoadRequest(new NSUrlRequest(NSUrl.FromFilename(value)));
                 }
             }
@@ -46,12 +47,12 @@ namespace Xamarin.Utilities.DialogElements
             {
                 if (value == null)
                 {
-                    _hasValue = false;
+                    HasValue = false;
                     WebView.LoadHtmlString(string.Empty, NSBundle.MainBundle.BundleUrl);
                 }
                 else
                 {
-                    _hasValue = true;
+                    HasValue = true;
                     WebView.LoadHtmlString(value, NSBundle.MainBundle.BundleUrl);
                 }
             }
@@ -103,7 +104,7 @@ namespace Xamarin.Utilities.DialogElements
             WebView.ShouldStartLoad = (w, r, n) => ShouldStartLoad(r, n);
             WebView.LoadFinished += (sender, e) => 
             {
-                if (LoadFinished != null && _hasValue)
+                if (LoadFinished != null && HasValue)
                     LoadFinished();
             };
 
@@ -115,7 +116,7 @@ namespace Xamarin.Utilities.DialogElements
 
         public float GetHeight (UITableView tableView, NSIndexPath indexPath)
         {
-            return _hasValue ? _height : 0f;
+            return HasValue ? _height : 0f;
         }
 
         public override UITableViewCell GetCell (UITableView tv)

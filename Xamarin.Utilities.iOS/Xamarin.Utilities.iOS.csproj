@@ -138,11 +138,11 @@
     <BundleResource Include="Xamarin.Utilities.bundle\back%402x.png" />
     <BundleResource Include="Xamarin.Utilities.bundle\back.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.csproj">
-      <Project>{0ca8cc58-18fa-4f91-9e47-cae155ce3965}</Project>
+      <Project>{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}</Project>
       <Name>Xamarin.Utilities.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
 </Project>

@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using Autofac;
+using System.Reflection;
+using System.Collections.Generic;
 
 public class IoC
 {
@@ -23,12 +25,38 @@ public class IoC
 
     public static T Resolve<T>()
     {
-        return Container.Value.Resolve<T>();
+        return (T)Resolve(typeof(T));
     }
 
     public static object Resolve(Type t)
     {
-        return Container.Value.Resolve(t);
+        if (Container.Value.IsRegistered(t))
+            return Container.Value.Resolve(t);
+        else
+        {
+            var type = t.GetTypeInfo();
+            var constructors = type.DeclaredConstructors;
+            foreach (var constructor in constructors)
+            {
+                try
+                {
+                    var parameters = constructor.GetParameters();
+                    var parameterInstances = new List<object>();
+                    foreach (var parameter in parameters)
+                    {
+                        var service = Resolve(parameter.ParameterType);
+                        if (service == null) throw new Exception("Unkown dependency");
+                        parameterInstances.Add(service);
+                    }
+                    return Activator.CreateInstance(t, parameterInstances.ToArray());
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+            throw new Exception("No contructor was found that had all the dependencies satisfied.");
+        }
     }
 
     public static void Register<TInterface, TConcrete>()

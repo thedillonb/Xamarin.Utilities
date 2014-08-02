@@ -41,7 +41,6 @@
     <Compile Include="Extensions\ReactiveListExtensions.cs" />
     <Compile Include="Persistence\DatabaseCollection.cs" />
     <Compile Include="Persistence\DatabaseItem.cs" />
-    <Compile Include="Persistence\SQLite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactiveAddons\ReactiveCollection.cs" />
     <Compile Include="Services\AnalyticsService.cs" />
