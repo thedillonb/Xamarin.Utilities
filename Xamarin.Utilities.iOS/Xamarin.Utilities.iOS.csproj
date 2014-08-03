@@ -35,7 +35,6 @@
     <Compile Include="Extensions\UIBarButtonItemExtensions.cs" />
     <Compile Include="Extensions\UIImageExtensions.cs" />
     <Compile Include="Images\UIImageHelper.cs" />
-    <Compile Include="Layouts\Layouts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlertDialogService.cs" />
     <Compile Include="Services\DefaultValueService.cs" />
@@ -127,10 +126,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <BundleResource Include="Resources\back.png" />
-    <BundleResource Include="Resources\back%402x.png" />
-    <BundleResource Include="Resources\forward.png" />
-    <BundleResource Include="Resources\forward%402x.png" />
     <BundleResource Include="Xamarin.Utilities.bundle\forward%402x.png" />
     <BundleResource Include="Xamarin.Utilities.bundle\forward.png" />
     <BundleResource Include="Xamarin.Utilities.bundle\back%402x.png" />
