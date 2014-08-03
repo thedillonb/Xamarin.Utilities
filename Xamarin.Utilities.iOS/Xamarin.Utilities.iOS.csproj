@@ -47,6 +47,7 @@
     <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\StatusIndicatorService.cs" />
     <Compile Include="ViewControllers\ComposerViewController.cs" />
+    <Compile Include="ViewControllers\DialogViewController.cs" />
     <Compile Include="ViewControllers\LiteComposerViewController.cs" />
     <Compile Include="Views\PickerAlertView.cs" />
     <Compile Include="Views\RoundedRectView.cs" />
