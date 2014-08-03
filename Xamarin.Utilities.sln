@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Utilities.iOS", "Xamarin.Utilities.iOS\Xamarin.Utilities.iOS.csproj", "{5E7E39CA-0CCE-41FE-A868-EE0E567E069E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Utilities.Android", "Xamarin.Utilities.Android\Xamarin.Utilities.Android.csproj", "{9D4EB2B6-0F07-46EF-B88D-08BF7813AEA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Utilities.Core", "Xamarin.Utilities.Core\Xamarin.Utilities.Core.csproj", "{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Utilities.Core.iOS", "Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj", "{FDF746EB-46C2-4B70-80AC-07B542140836}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,14 +17,9 @@ Global
 		{5E7E39CA-0CCE-41FE-A868-EE0E567E069E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7E39CA-0CCE-41FE-A868-EE0E567E069E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7E39CA-0CCE-41FE-A868-EE0E567E069E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D4EB2B6-0F07-46EF-B88D-08BF7813AEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D4EB2B6-0F07-46EF-B88D-08BF7813AEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D4EB2B6-0F07-46EF-B88D-08BF7813AEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D4EB2B6-0F07-46EF-B88D-08BF7813AEA7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Xamarin.Utilities.iOS\Xamarin.Utilities.iOS.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

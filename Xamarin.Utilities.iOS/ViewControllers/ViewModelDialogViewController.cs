@@ -11,7 +11,7 @@ using System.Reactive.Subjects;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class ViewModelDialogViewController<TViewModel> : ReactiveTableViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
+    public abstract class ViewModelDialogViewController<TViewModel> : ReactiveTableViewController, IViewFor<TViewModel> where TViewModel : class, IBaseViewModel
 	{
         protected readonly INetworkActivityService NetworkActivityService = IoC.Resolve<INetworkActivityService>();
         private UIRefreshControl _refreshControl;

@@ -14,7 +14,8 @@ namespace Xamarin.Utilities.Core.Services
         {
             foreach (var type in asm.DefinedTypes.Where(x => !x.IsAbstract && x.ImplementedInterfaces.Any(y => y == typeof(IViewFor))))
             {
-                var viewForType = type.ImplementedInterfaces.FirstOrDefault(x => x.IsConstructedGenericType && x.GetGenericTypeDefinition() == typeof(IViewFor<>));
+                var viewForType = type.ImplementedInterfaces.FirstOrDefault(
+                                      x => x.IsConstructedGenericType && x.GetGenericTypeDefinition() == typeof(IViewFor<>));
                 Register(viewForType.GenericTypeArguments[0], type.AsType());
             }
         }

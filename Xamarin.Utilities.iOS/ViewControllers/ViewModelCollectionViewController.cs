@@ -6,7 +6,7 @@ using System;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public class ViewModelCollectionViewController<TViewModel> : ViewModelDialogViewController<TViewModel> where TViewModel : class, IBaseViewModel
+    public abstract class ViewModelCollectionViewController<TViewModel> : ViewModelDialogViewController<TViewModel> where TViewModel : class, IBaseViewModel
     {
         private readonly UISearchBar _searchBar;
         private Subject<string> _searchTextChanging = new Subject<string>();

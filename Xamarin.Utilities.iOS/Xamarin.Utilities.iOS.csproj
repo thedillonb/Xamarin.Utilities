@@ -100,24 +100,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Common\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\lib\Common\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\lib\Common\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\lib\Common\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices">
-      <HintPath>..\lib\Common\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI">
       <HintPath>..\lib\iOS\ReactiveUI.dll</HintPath>
@@ -125,6 +111,19 @@
     <Reference Include="Splat">
       <HintPath>..\lib\iOS\Splat.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\lib\iOS\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\lib\iOS\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\lib\iOS\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\lib\iOS\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
@@ -139,9 +138,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.csproj">
-      <Project>{0CA8CC58-18FA-4F91-9E47-CAE155CE3965}</Project>
-      <Name>Xamarin.Utilities.Core</Name>
+    <ProjectReference Include="..\Xamarin.Utilities.Core\Xamarin.Utilities.Core.iOS.csproj">
+      <Project>{FDF746EB-46C2-4B70-80AC-07B542140836}</Project>
+      <Name>Xamarin.Utilities.Core.iOS</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

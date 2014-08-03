@@ -193,7 +193,7 @@ namespace Xamarin.Utilities.DialogElements
             Reset((IEnumerable<Section>)sections);
         }
 
-        public void Reload (Section section, UITableViewRowAnimation animation)
+        public void Reload (Section section, UITableViewRowAnimation animation = UITableViewRowAnimation.None)
         {
             if (section == null)
                 throw new ArgumentNullException ("section");
@@ -201,16 +201,26 @@ namespace Xamarin.Utilities.DialogElements
                 throw new ArgumentException ("Section is not attached to this root");
 
             int idx = 0;
-            foreach (var sect in _sections){
-                if (sect == section){
-                    _tableView.ReloadSections (new NSIndexSet ((uint) idx), animation);
+            foreach (var sect in _sections)
+            {
+                if (sect == section)
+                {
+                    try
+                    {
+                        _tableView.BeginUpdates();
+                        _tableView.ReloadSections (new NSIndexSet ((uint) idx), animation);
+                    }
+                    finally
+                    {
+                        _tableView.EndUpdates();
+                    }
                     return;
                 }
                 idx++;
             }
         }
 
-        public void Reload (Element element, UITableViewRowAnimation animation)
+        public void Reload (Element element, UITableViewRowAnimation animation = UITableViewRowAnimation.None)
         {
             if (element == null)
                 throw new ArgumentNullException ("element");
@@ -221,7 +231,16 @@ namespace Xamarin.Utilities.DialogElements
             var path = element.IndexPath;
             if (path == null)
                 return;
-            _tableView.ReloadRows (new [] { path }, animation);
+
+            try
+            {
+                _tableView.BeginUpdates();
+                _tableView.ReloadRows (new [] { path }, animation);
+            }
+            finally
+            {
+                _tableView.EndUpdates();
+            }
         }
 
         public IEnumerator<Section> GetEnumerator()

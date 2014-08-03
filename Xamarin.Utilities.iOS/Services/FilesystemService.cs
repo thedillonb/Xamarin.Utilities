@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Xamarin.Utilities.Core.Services;
+using System;
 
 namespace Xamarin.Utilities.Services
 {
@@ -9,6 +10,11 @@ namespace Xamarin.Utilities.Services
         {
             path = name == null ? Path.GetTempFileName() : Path.Combine(Path.GetTempPath(), name);
             return new FileStream(path, FileMode.Create, FileAccess.Write);
+        }
+
+        public string DocumentDirectory
+        {
+            get { return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); }
         }
     }
 }
