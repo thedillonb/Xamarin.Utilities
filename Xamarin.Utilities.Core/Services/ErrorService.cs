@@ -1,17 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace Xamarin.Utilities.Core.Services
 {
     public class ErrorService : IErrorService
     {
         private readonly static string CrashReportFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "crash_report.json");
-        private readonly JsonSerializerSettings _settings;
+        private readonly IJsonSerializationService _jsonSerialization;
         private readonly HttpClient _httpClient;
         private readonly IEnvironmentalService _environmentService;
         private string _sentryUrl;
@@ -23,14 +22,13 @@ namespace Xamarin.Utilities.Core.Services
             get { return System.IO.File.Exists(CrashReportFile); }
         }
 
-        public ErrorService(IHttpClientService httpClient, IEnvironmentalService environmentService)
+        public ErrorService(IHttpClientService httpClient, IJsonSerializationService jsonSerialization, IEnvironmentalService environmentService)
         {
+            _jsonSerialization = jsonSerialization;
             _environmentService = environmentService;
             _httpClient = httpClient.Create();
             _httpClient.Timeout = new TimeSpan(0, 0, 10);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _settings = new JsonSerializerSettings();
-            _settings.ContractResolver = new SnakeCaseContractResolver();
         }
 
         public event AddExtraInformationDelegate AddExtraInformation;
@@ -95,8 +93,7 @@ namespace Xamarin.Utilities.Core.Services
 
         private void PersistRequest(object request)
         {
-            var crash = JsonConvert.SerializeObject(request, _settings);
-            System.IO.File.WriteAllText(CrashReportFile, crash, Encoding.UTF8);
+            System.IO.File.WriteAllText(CrashReportFile, _jsonSerialization.Serialize(request), Encoding.UTF8);
         }
 
         private void SendPersistedRequest()
@@ -105,7 +102,7 @@ namespace Xamarin.Utilities.Core.Services
             {
                 var fileData = System.IO.File.ReadAllText(CrashReportFile, Encoding.UTF8);
                 System.IO.File.Delete(CrashReportFile);
-                SendRequest(JsonConvert.DeserializeObject<SentryRequest>(fileData));
+                SendRequest(_jsonSerialization.Deserialize<SentryRequest>(fileData));
             }
             catch (Exception e)
             {
@@ -117,10 +114,10 @@ namespace Xamarin.Utilities.Core.Services
         private void SendRequest(SentryRequest request)
         {
             Console.WriteLine("Would have sent Sentry Dump to {0}:{1}:{2}", _sentryUrl, _sentryClientId, _sentrySecret);
-            Console.WriteLine(JsonConvert.SerializeObject(request));
+            Console.WriteLine(_jsonSerialization.Serialize(request));
         }
 #else
-        private void SendRequest(object request)
+        private void SendRequest(SentryRequest request)
         {
             var header = String.Format("Sentry sentry_version={0}"
                 + ", sentry_client={1}"
@@ -135,12 +132,12 @@ namespace Xamarin.Utilities.Core.Services
 
             var req = new HttpRequestMessage(HttpMethod.Post, new Uri(_sentryUrl));
             req.Headers.Add("X-Sentry-Auth", header);
-            var requestData = JsonConvert.SerializeObject(request, _settings);
+            var requestData = _jsonSerialization.Serialize(request);
             req.Content = new StringContent(requestData, Encoding.UTF8, "application/json");
             _httpClient.SendAsync(req).ContinueWith(t =>
             {
                 if (t.Status != System.Threading.Tasks.TaskStatus.RanToCompletion)
-                    Console.WriteLine("Unable to send sentry analytic");
+                    Debug.WriteLine("Unable to send sentry analytic");
             });
         }
 #endif
@@ -286,51 +283,6 @@ namespace Xamarin.Utilities.Core.Services
             }
         }
 
-        private class SnakeCaseContractResolver : Newtonsoft.Json.Serialization.DefaultContractResolver
-        {
-            protected override string ResolvePropertyName(string propertyName)
-            {
-                return GetSnakeCase(propertyName);
-            }
-
-            private string GetSnakeCase(string input)
-            {
-                if (string.IsNullOrEmpty(input))
-                    return input;
-
-                var buffer = "";
-
-                for (var i = 0; i < input.Length; i++)
-                {
-                    var isLast = (i == input.Length - 1);
-                    var isSecondFromLast = (i == input.Length - 2);
-
-                    var curr = input[i];
-                    var next = !isLast ? input[i + 1] : '\0';
-                    var afterNext = !isSecondFromLast && !isLast ? input[i + 2] : '\0';
-
-                    buffer += char.ToLower(curr);
-
-                    if (!char.IsDigit(curr) && char.IsUpper(next))
-                    {
-                        if (char.IsUpper(curr))
-                        {
-                            if (!isLast && !isSecondFromLast && !char.IsUpper(afterNext))
-                                buffer += "_";
-                        }
-                        else
-                            buffer += "_";
-                    }
-
-                    if (!char.IsDigit(curr) && char.IsDigit(next))
-                        buffer += "_";
-                    if (char.IsDigit(curr) && !char.IsDigit(next) && !isLast)
-                        buffer += "_";
-                }
-
-                return buffer;
-            }
-        }
     }
 }
 
