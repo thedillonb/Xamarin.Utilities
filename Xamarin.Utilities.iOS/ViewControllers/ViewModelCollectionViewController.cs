@@ -27,7 +27,9 @@ namespace Xamarin.Utilities.ViewControllers
 
         public string SearchPlaceholder { get; set; }
 
-        public ViewModelCollectionViewController(bool unevenRows = false, bool searchbarEnabled = true)
+        public UISearchBar SearchBar { get { return _searchBar; } }
+
+        protected ViewModelCollectionViewController(bool unevenRows = false, bool searchbarEnabled = true)
             : base(unevenRows, UITableViewStyle.Plain)
         {
             if (searchbarEnabled)
