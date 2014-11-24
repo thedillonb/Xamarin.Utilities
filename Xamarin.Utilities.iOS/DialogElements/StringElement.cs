@@ -3,6 +3,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 using Xamarin.Utilities.Images;
 using System.Drawing;
+using SDWebImage;
 
 namespace Xamarin.Utilities.DialogElements
 {
@@ -63,7 +64,7 @@ namespace Xamarin.Utilities.DialogElements
     ///   options and can render images or background images either from UIImage parameters 
     ///   or by downloading them from the net.
     /// </summary>
-    public class StyledStringElement : StringElement, IImageUpdated 
+    public class StyledStringElement : StringElement 
     {
         public static UIFont  DefaultTitleFont = UIFont.SystemFontOfSize(16f);
         public static UIFont  DefaultDetailFont = UIFont.SystemFontOfSize(13f);
@@ -129,7 +130,7 @@ namespace Xamarin.Utilities.DialogElements
         class ExtraInfo {
             public UIImage Image; // Maybe add BackgroundImage?
             public UIColor BackgroundColor, DetailColor;
-            public Uri Uri, BackgroundUri;
+            public Uri Uri;
         }
 
         ExtraInfo OnImageInfo ()
@@ -168,7 +169,6 @@ namespace Xamarin.Utilities.DialogElements
             }
             set {
                 OnImageInfo ().BackgroundColor = value;
-                extraInfo.BackgroundUri = null;
             }
         }
 
@@ -178,17 +178,6 @@ namespace Xamarin.Utilities.DialogElements
             }
             set {
                 OnImageInfo ().DetailColor = value;
-            }
-        }
-
-        // Uri for a Background image (alternatiev: BackgroundColor)
-        public Uri BackgroundUri {
-            get {
-                return extraInfo == null ? null : extraInfo.BackgroundUri;
-            }
-            set {
-                OnImageInfo ().BackgroundUri = value;
-                extraInfo.BackgroundColor = null;
             }
         }
 
@@ -226,12 +215,6 @@ namespace Xamarin.Utilities.DialogElements
                     cell.BackgroundColor = extraInfo.BackgroundColor;
                     cell.TextLabel.BackgroundColor = UIColor.Clear;
                 }
-                else if (extraInfo.BackgroundUri != null)
-                {
-                    var img = ImageLoader.DefaultRequestImage(extraInfo.BackgroundUri, this);
-                    cell.BackgroundColor = img == null ? UIColor.White : UIColor.FromPatternImage(img);
-                    cell.TextLabel.BackgroundColor = UIColor.Clear;
-                }
             }
 
             return cell;
@@ -256,16 +239,20 @@ namespace Xamarin.Utilities.DialogElements
                 ClearBackground (cell);
             } else {
                 var imgView = cell.ImageView;
-                UIImage img;
 
                 if (imgView != null) {
                     if (extraInfo.Uri != null)
-                        img = ImageLoader.DefaultRequestImage (extraInfo.Uri, this);
+                    {
+                        imgView.SetImage(new NSUrl(extraInfo.Uri.AbsoluteUri));
+                    }
                     else if (extraInfo.Image != null)
-                        img = extraInfo.Image;
-                    else 
-                        img = null;
-                    imgView.Image = img;
+                    {
+                        imgView.Image = extraInfo.Image;
+                    }
+                    else
+                    {
+                        imgView.Image = null;
+                    }
                 }
 
                 if (cell.DetailTextLabel != null)
@@ -288,16 +275,6 @@ namespace Xamarin.Utilities.DialogElements
             if (cell.DetailTextLabel != null)
                 cell.DetailTextLabel.BackgroundColor = UIColor.Clear;
         }
-
-        void IImageUpdated.UpdatedImage (Uri uri)
-        {
-            if (uri == null || extraInfo == null)
-                return;
-            var root = GetRootElement ();
-            if (root == null || root.TableView == null)
-                return;
-            root.TableView.ReloadRows (new NSIndexPath [] { IndexPath }, UITableViewRowAnimation.None);
-        }   
 
         internal void AccessoryTap ()
         {

@@ -14,5 +14,12 @@ namespace MonoTouch.UIKit
         {
             EnableIfExecutable(@this, command.CanExecuteObservable);
         }
+
+        public static UIBarButtonItem WithCommand(this UIBarButtonItem @this, IReactiveCommand command)
+        {
+            @this.Clicked += (sender, e) => command.ExecuteIfCan();
+            @this.EnableIfExecutable(command.CanExecuteObservable);
+            return @this;
+        }
     }
 }

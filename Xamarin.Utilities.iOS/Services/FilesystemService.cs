@@ -1,6 +1,6 @@
 ﻿using System.IO;
-using Xamarin.Utilities.Core.Services;
 using System;
+using System.Collections.Generic;
 
 namespace Xamarin.Utilities.Services
 {
@@ -15,6 +15,11 @@ namespace Xamarin.Utilities.Services
         public string DocumentDirectory
         {
             get { return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); }
+        }
+
+        public IEnumerable<string> GetFiles(string path)
+        {
+            return Directory.GetFiles(path);
         }
     }
 }

@@ -290,7 +290,8 @@ namespace Xamarin.Utilities.DialogElements
             _elements.AddRange(elements);
             foreach (var e in _elements)
                 e.Section = this;
-            Root.TableView.ReloadData();
+            if (Root != null && Root.TableView != null)
+                Root.TableView.ReloadData();
         }
     }
 }

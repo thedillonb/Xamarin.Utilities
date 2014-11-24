@@ -1,8 +1,8 @@
 ﻿using System;
 using MonoTouch.UIKit;
 using System.Collections.Generic;
-using Xamarin.Utilities.Views;
 using System.Drawing;
+using Xamarin.Utilities.ViewComponents;
 
 namespace Xamarin.Utilities.Extensions
 {

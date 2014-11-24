@@ -1,5 +1,6 @@
 ﻿using MonoTouch.UIKit;
 
+// Analysis disable once CheckNamespace
 namespace Xamarin.Utilities.Images
 {
     public static class Images

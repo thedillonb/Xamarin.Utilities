@@ -36,7 +36,7 @@ namespace Xamarin.Utilities.DialogElements
             return cell;
         }
 
-        internal RootElement(UITableView tableView)
+        public RootElement(UITableView tableView)
         {
             _tableView = tableView;
         }

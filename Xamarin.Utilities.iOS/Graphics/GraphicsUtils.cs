@@ -1,5 +1,4 @@
-﻿using System;
-using MonoTouch.CoreGraphics;
+﻿using MonoTouch.CoreGraphics;
 using System.Drawing;
 
 namespace Xamarin.Utilities.Graphics

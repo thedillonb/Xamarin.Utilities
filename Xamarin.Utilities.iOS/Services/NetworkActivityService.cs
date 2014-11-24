@@ -1,5 +1,7 @@
 using MonoTouch.UIKit;
 using Xamarin.Utilities.Core.Services;
+using System;
+using System.Reactive.Disposables;
 
 namespace Xamarin.Utilities.Services
 {
@@ -34,6 +36,12 @@ namespace Xamarin.Utilities.Services
                 if (_active == 0)
                     MainApp.NetworkActivityIndicatorVisible = false;
             }
+        }
+
+        public IDisposable ActivateNetwork()
+        {
+            PushNetworkActive();
+            return Disposable.Create(PopNetworkActive);
         }
     }
 }

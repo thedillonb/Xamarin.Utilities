@@ -1,8 +1,0 @@
-namespace Xamarin.Utilities.Core.Services
-{
-    public interface IShareService
-    {
-        void ShareUrl(string url);
-    }
-}
-

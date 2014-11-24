@@ -1,4 +1,3 @@
-using MonoTouch.Dialog;
 using MonoTouch.UIKit;
 
 namespace Xamarin.Utilities.DialogElements

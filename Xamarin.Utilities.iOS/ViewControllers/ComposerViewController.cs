@@ -4,12 +4,12 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using ReactiveUI;
-using Xamarin.Utilities.Core.ViewModels;
-using Xamarin.Utilities.Views;
+using Xamarin.Utilities.ViewModels;
+using Xamarin.Utilities.ViewComponents;
 
 namespace Xamarin.Utilities.ViewControllers
 {
-    public abstract class ComposerViewController<TViewModel> : ReactiveViewController, IViewFor<TViewModel> where TViewModel : ComposerViewModel
+    public abstract class ComposerViewController<TViewModel> : ReactiveViewController, IViewFor<TViewModel> where TViewModel : class, IComposerViewModel
     {
         protected UIBarButtonItem SendItem;
         protected readonly UITextView TextView;
@@ -22,7 +22,7 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewDidAppear(animated);
 
-            _observer = NSNotificationCenter.DefaultCenter.AddObserver(UITextField.TextFieldTextDidChangeNotification,
+            _observer = NSNotificationCenter.DefaultCenter.AddObserver(UITextView.TextDidChangeNotification,
                 notification => ViewModel.Text = TextView.Text);
         }
 
@@ -30,10 +30,14 @@ namespace Xamarin.Utilities.ViewControllers
         {
             base.ViewDidDisappear(animated);
 
-            NSNotificationCenter.DefaultCenter.RemoveObserver(_observer);
+            if (_observer != null)
+            {
+                NSNotificationCenter.DefaultCenter.RemoveObserver(_observer);
+                _observer = null;
+            }
         }
 
-        public ComposerViewController()
+        protected ComposerViewController()
             : base(null, null)
         {
 

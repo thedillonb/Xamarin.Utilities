@@ -1,15 +1,14 @@
 using System;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Xamarin.Utilities.Core.Services;
 
 namespace Xamarin.Utilities.Services
 {
 	public class ShareService : IShareService
     {
-		public void ShareUrl(string url)
+		public void ShareUrl(Uri uri)
 		{
-			var item = new NSUrl(new Uri(url).AbsoluteUri);
+			var item = new NSUrl(uri.AbsoluteUri);
 			var activityItems = new NSObject[] { item };
 			UIActivity[] applicationActivities = null;
 			var activityController = new UIActivityViewController (activityItems, applicationActivities);
